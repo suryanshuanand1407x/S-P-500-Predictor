@@ -1,0 +1,5 @@
+Timestamp,Asset,Current_Price,Predicted_Price,Change_%,Direction,Drift_Level,Guardrails_Applied
+2025-10-23T23:26:30.830970,SENSEX,84426.34,71762.39,-15.00,DOWN,critical,Yes
+2025-10-23T23:26:30.830970,GOLD,3843.80,3267.23,-15.00,DOWN,critical,Yes
+2025-10-23T23:35:21.670753,SENSEX,84426.34,71762.39,-15.00,DOWN,critical,Yes
+2025-10-23T23:35:21.670753,GOLD,3843.80,3267.23,-15.00,DOWN,critical,Yes

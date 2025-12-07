@@ -1,0 +1,16 @@
+{
+  "SENSEX": {
+    "SENSEX_01102003_23102025.csv": {
+      "hash": "e684953f01142c1fe44b9a613cdae936cbd195b7d176ce3c601d17abfcce182c",
+      "size_bytes": 281267,
+      "path": "data/sensex/SENSEX_01102003_23102025.csv"
+    }
+  },
+  "GOLD": {
+    "XAU_1d_data.csv": {
+      "hash": "d2f1566866ee55e77315ce57577874b996ec465c951f9acd43569730af796aa3",
+      "size_bytes": 288825,
+      "path": "data/gold/XAU_1d_data.csv"
+    }
+  }
+}

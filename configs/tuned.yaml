@@ -1,0 +1,38 @@
+# Optimized Configuration based on Hyperparameter Tuning
+# Generated from hyperparameter search results
+
+paths:
+  sp_raw_glob: "data/sp/*.csv"
+  sp_clean: "data/processed/sp_clean.csv"
+  reports_dir: "reports"
+  models_dir: "models"
+  logs_dir: "logs"
+
+training:
+  asset_list: ["SP"]
+  seq_len: 60
+  horizon_days: 1
+  features: ["Close","Open","High","Low","Volume","ret_1d","vol_10d","zscore_20d","rsi_14","ema_10","ema_20","atr_14"]
+
+  # Optimized hyperparameters from tuning
+  batch_size: 128               # Smaller batch for better generalization
+  epochs: 400                   # More epochs for convergence
+  lr: 0.0005                    # Lower learning rate for stability
+  hidden_size: 256              # Larger hidden size for capacity
+  num_layers: 2                 # 2 layers works well
+  dropout: 0.2                  # Balanced dropout
+
+  early_stop_patience: 20       # More patience with lower LR
+  optimizer: "adamw"            # AdamW for weight decay
+  scheduler: "cosine"           # Cosine annealing
+  seed: 42
+  device: "mps"
+
+cv:
+  n_folds: 8
+  train_min_years: 10
+  val_months: 1
+  test_holdout_months: 6           # UPDATED: Reduced from 18 to 6 months to include 2024-2025 data in training
+  step_months: 1
+  min_rows_required: 5000
+  min_years_required: 20

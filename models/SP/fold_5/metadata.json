@@ -1,0 +1,120 @@
+{
+  "artifact_version": "1.0.0",
+  "timestamp": "2025-10-25T07:31:09.240578+00:00",
+  "asset": "SP",
+  "fold": 5,
+  "training_config": {
+    "paths": {
+      "sp_raw_glob": "data/sp/*.csv",
+      "sp_raw_glob_old": "data/gold_backup/XAU_1d_data.csv",
+      "sp_clean": "data/processed/sp_clean.csv",
+      "sp_clean_old": "data/processed/sp_clean_old.csv",
+      "reports_dir": "reports",
+      "models_dir": "models",
+      "logs_dir": "logs"
+    },
+    "training": {
+      "asset_list": [
+        "SP",
+        "SP"
+      ],
+      "seq_len": 60,
+      "horizon_days": 1,
+      "features": [
+        "Close",
+        "Open",
+        "High",
+        "Low",
+        "Volume",
+        "ret_1d",
+        "vol_10d",
+        "zscore_20d",
+        "rsi_14",
+        "ema_10",
+        "ema_20",
+        "atr_14"
+      ],
+      "batch_size": 128,
+      "epochs": 400,
+      "lr": 0.0005,
+      "hidden_size": 256,
+      "num_layers": 2,
+      "dropout": 0.2,
+      "early_stop_patience": 20,
+      "optimizer": "adamw",
+      "scheduler": "cosine",
+      "seed": 42,
+      "device": "mps"
+    },
+    "cv": {
+      "n_folds": 8,
+      "train_min_years": 10,
+      "val_months": 1,
+      "test_holdout_months": 6,
+      "step_months": 1,
+      "min_rows_required": 5000,
+      "min_years_required": 20
+    }
+  },
+  "feature_schema": {
+    "feature_names": [
+      "Open",
+      "High",
+      "Low",
+      "Volume",
+      "ret_1d",
+      "vol_10d",
+      "zscore_20d",
+      "rsi_14",
+      "ema_10",
+      "ema_20",
+      "atr_14",
+      "corr_removed",
+      "Close"
+    ],
+    "feature_count": 13,
+    "seq_len": 60
+  },
+  "model_info": {
+    "class_name": "LSTMPricePredictor",
+    "input_size": 13,
+    "hidden_size": 256,
+    "num_layers": 2,
+    "dropout": 0.2,
+    "total_parameters": 804097
+  },
+  "checksums": {
+    "model.pt": "a4870cf0de9e6c280019812d50a9c68e0a8fb5f28a430fc3447f85ca273ad8fe",
+    "feature_names.json": "b37a9be75f40933078eddf8ed7c9edee554169457fe4d38a3b4d20cc23ebe10d",
+    "seq_len.json": "e1a34383f0d66e246ae0c9470e9ff94a321cd7ea5f991fb36b8e68210ed373fd",
+    "feature_scaler.pkl": "837c73e1b14f68b8701026829d21e24b22a2460e21383a34bef9cf7d7c5094ba",
+    "target_scaler.pkl": "2b44c24dc8c768a7bacbf3337d60c20985ba35f6e19fc796bc05bb06fcc9211a",
+    "metadata.json": "f0f2e0825d017ab549ae573993d9f523e5958bd0b25f30f013f2f10a0db451c3"
+  },
+  "training_metadata": {
+    "train_samples": 4393,
+    "val_samples": 0,
+    "final_train_loss": 0.02325735580833519,
+    "best_val_loss": null,
+    "total_epochs": 400,
+    "early_stopped": false,
+    "fold_config": {
+      "fold_idx": 5,
+      "train_start": "2003-10-01",
+      "train_end": "2021-09-01",
+      "val_start": "2021-09-01",
+      "val_end": "2021-10-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 4453,
+      "val_samples": 21,
+      "test_samples": 127,
+      "train_months_actual": 215,
+      "val_months_actual": 1
+    },
+    "data_splits": {
+      "train_end": "2021-09-01",
+      "val_end": "2021-10-01"
+    }
+  }
+}

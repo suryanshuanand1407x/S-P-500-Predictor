@@ -1,0 +1,120 @@
+{
+  "artifact_version": "1.0.0",
+  "timestamp": "2025-10-25T07:53:06.597353+00:00",
+  "asset": "GOLD",
+  "fold": 2,
+  "training_config": {
+    "paths": {
+      "sensex_raw_glob": "data/sensex/*.csv",
+      "gold_raw_glob": "data/gold/XAU_1d_data.csv",
+      "sensex_clean": "data/processed/sensex_clean.csv",
+      "gold_clean": "data/processed/gold_clean.csv",
+      "reports_dir": "reports",
+      "models_dir": "models",
+      "logs_dir": "logs"
+    },
+    "training": {
+      "asset_list": [
+        "SENSEX",
+        "GOLD"
+      ],
+      "seq_len": 60,
+      "horizon_days": 1,
+      "features": [
+        "Close",
+        "Open",
+        "High",
+        "Low",
+        "Volume",
+        "ret_1d",
+        "vol_10d",
+        "zscore_20d",
+        "rsi_14",
+        "ema_10",
+        "ema_20",
+        "atr_14"
+      ],
+      "batch_size": 128,
+      "epochs": 400,
+      "lr": 0.0005,
+      "hidden_size": 256,
+      "num_layers": 2,
+      "dropout": 0.2,
+      "early_stop_patience": 20,
+      "optimizer": "adamw",
+      "scheduler": "cosine",
+      "seed": 42,
+      "device": "mps"
+    },
+    "cv": {
+      "n_folds": 8,
+      "train_min_years": 10,
+      "val_months": 1,
+      "test_holdout_months": 6,
+      "step_months": 1,
+      "min_rows_required": 5000,
+      "min_years_required": 20
+    }
+  },
+  "feature_schema": {
+    "feature_names": [
+      "Open",
+      "High",
+      "Low",
+      "Volume",
+      "ret_1d",
+      "vol_10d",
+      "zscore_20d",
+      "rsi_14",
+      "ema_10",
+      "ema_20",
+      "atr_14",
+      "corr_sensex_20d",
+      "Close"
+    ],
+    "feature_count": 13,
+    "seq_len": 60
+  },
+  "model_info": {
+    "class_name": "LSTMPricePredictor",
+    "input_size": 13,
+    "hidden_size": 256,
+    "num_layers": 2,
+    "dropout": 0.2,
+    "total_parameters": 804097
+  },
+  "checksums": {
+    "model.pt": "2d3e4c736921b6c5b8c63ee07fae8b907d0c28b1888ee5985e33d511a45999ac",
+    "feature_names.json": "4555dfb5d938746b444d5489d95a93361e287ea443ff7646fdf45a3cd300ed61",
+    "seq_len.json": "1af0d46edd2784426272b22ed9aff7a9d99e25d3da892f63c8ff2e0a553b634b",
+    "feature_scaler.pkl": "8d887ebf769dc95b4be5a32ad84a96009bdc67549cb690b9d57d0e2ba1af48a5",
+    "target_scaler.pkl": "d48add944123f3aaf5ef118595dfe91777759cabc1da08cbc51a486626cefc38",
+    "metadata.json": "2ec946e2217fa40f90d57f13a5a4619eac0b5f624f96a410467b7ba31bcc5b5b"
+  },
+  "training_metadata": {
+    "train_samples": 3136,
+    "val_samples": 0,
+    "final_train_loss": 0.028662835170204442,
+    "best_val_loss": null,
+    "total_epochs": 400,
+    "early_stopped": false,
+    "fold_config": {
+      "fold_idx": 2,
+      "train_start": "2003-10-01",
+      "train_end": "2016-12-01",
+      "val_start": "2016-12-01",
+      "val_end": "2017-01-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 3276,
+      "val_samples": 21,
+      "test_samples": 127,
+      "train_months_actual": 158,
+      "val_months_actual": 1
+    },
+    "data_splits": {
+      "train_end": "2016-12-01",
+      "val_end": "2017-01-01"
+    }
+  }
+}

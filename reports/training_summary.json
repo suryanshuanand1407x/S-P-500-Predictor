@@ -1,0 +1,455 @@
+{
+  "timestamp": "2025-10-25T14:20:57.823701",
+  "config": {
+    "paths": {
+      "sensex_raw_glob": "data/sensex/*.csv",
+      "gold_raw_glob": "data/gold/XAU_1d_data.csv",
+      "sensex_clean": "data/processed/sensex_clean.csv",
+      "gold_clean": "data/processed/gold_clean.csv",
+      "reports_dir": "reports",
+      "models_dir": "models",
+      "logs_dir": "logs"
+    },
+    "training": {
+      "asset_list": [
+        "SENSEX",
+        "GOLD"
+      ],
+      "seq_len": 60,
+      "horizon_days": 1,
+      "features": [
+        "Close",
+        "Open",
+        "High",
+        "Low",
+        "Volume",
+        "ret_1d",
+        "vol_10d",
+        "zscore_20d",
+        "rsi_14",
+        "ema_10",
+        "ema_20",
+        "atr_14"
+      ],
+      "batch_size": 128,
+      "epochs": 400,
+      "lr": 0.0005,
+      "hidden_size": 256,
+      "num_layers": 2,
+      "dropout": 0.2,
+      "early_stop_patience": 20,
+      "optimizer": "adamw",
+      "scheduler": "cosine",
+      "seed": 42,
+      "device": "mps"
+    },
+    "cv": {
+      "n_folds": 8,
+      "train_min_years": 10,
+      "val_months": 1,
+      "test_holdout_months": 6,
+      "step_months": 1,
+      "min_rows_required": 5000,
+      "min_years_required": 20
+    }
+  },
+  "device": "mps",
+  "ingestion_results": {
+    "SENSEX": {
+      "asset": "SENSEX",
+      "input_files": 1,
+      "final_rows": 5478,
+      "date_range": {
+        "start": "2003-10-01",
+        "end": "2025-10-21"
+      },
+      "output_path": "data/processed/sensex_clean.csv"
+    },
+    "GOLD": {
+      "asset": "GOLD",
+      "input_files": 1,
+      "final_rows": 5383,
+      "date_range": {
+        "start": "2004-06-11",
+        "end": "2025-09-30"
+      },
+      "output_path": "data/processed/gold_clean.csv"
+    }
+  },
+  "fold_configs": [
+    {
+      "fold_idx": 0,
+      "train_start": "2003-10-01",
+      "train_end": "2013-10-01",
+      "val_start": "2013-10-01",
+      "val_end": "2013-11-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 2497,
+      "val_samples": 21,
+      "test_samples": 127,
+      "train_months_actual": 120,
+      "val_months_actual": 1
+    },
+    {
+      "fold_idx": 1,
+      "train_start": "2003-10-01",
+      "train_end": "2015-05-01",
+      "val_start": "2015-05-01",
+      "val_end": "2015-06-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 2883,
+      "val_samples": 21,
+      "test_samples": 127,
+      "train_months_actual": 139,
+      "val_months_actual": 1
+    },
+    {
+      "fold_idx": 2,
+      "train_start": "2003-10-01",
+      "train_end": "2016-12-01",
+      "val_start": "2016-12-01",
+      "val_end": "2017-01-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 3276,
+      "val_samples": 21,
+      "test_samples": 127,
+      "train_months_actual": 158,
+      "val_months_actual": 1
+    },
+    {
+      "fold_idx": 3,
+      "train_start": "2003-10-01",
+      "train_end": "2018-07-01",
+      "val_start": "2018-07-01",
+      "val_end": "2018-08-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 3669,
+      "val_samples": 23,
+      "test_samples": 127,
+      "train_months_actual": 177,
+      "val_months_actual": 1
+    },
+    {
+      "fold_idx": 4,
+      "train_start": "2003-10-01",
+      "train_end": "2020-02-01",
+      "val_start": "2020-02-01",
+      "val_end": "2020-03-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 4060,
+      "val_samples": 19,
+      "test_samples": 127,
+      "train_months_actual": 196,
+      "val_months_actual": 1
+    },
+    {
+      "fold_idx": 5,
+      "train_start": "2003-10-01",
+      "train_end": "2021-09-01",
+      "val_start": "2021-09-01",
+      "val_end": "2021-10-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 4453,
+      "val_samples": 21,
+      "test_samples": 127,
+      "train_months_actual": 215,
+      "val_months_actual": 1
+    },
+    {
+      "fold_idx": 6,
+      "train_start": "2003-10-01",
+      "train_end": "2023-04-01",
+      "val_start": "2023-04-01",
+      "val_end": "2023-05-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 4846,
+      "val_samples": 17,
+      "test_samples": 127,
+      "train_months_actual": 234,
+      "val_months_actual": 1
+    },
+    {
+      "fold_idx": 7,
+      "train_start": "2003-10-01",
+      "train_end": "2024-11-01",
+      "val_start": "2024-11-01",
+      "val_end": "2024-12-01",
+      "test_start": "2025-04-21",
+      "test_end": "2025-10-21",
+      "train_samples": 5238,
+      "val_samples": 18,
+      "test_samples": 127,
+      "train_months_actual": 253,
+      "val_months_actual": 1
+    }
+  ],
+  "training_results": {
+    "SENSEX": [
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 0,
+        "train_samples": 2437,
+        "val_samples": 0,
+        "final_train_loss": 0.030428678483555193,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_0/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_0/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 1,
+        "train_samples": 2823,
+        "val_samples": 0,
+        "final_train_loss": 0.02790161823345856,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_1/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_1/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 2,
+        "train_samples": 3216,
+        "val_samples": 0,
+        "final_train_loss": 0.02452670782804489,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_2/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_2/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 3,
+        "train_samples": 3609,
+        "val_samples": 0,
+        "final_train_loss": 0.02461862623957651,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_3/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_3/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 4,
+        "train_samples": 4000,
+        "val_samples": 0,
+        "final_train_loss": 0.02211855544197944,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_4/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_4/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 5,
+        "train_samples": 4393,
+        "val_samples": 0,
+        "final_train_loss": 0.02325735580833519,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_5/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_5/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 6,
+        "train_samples": 4786,
+        "val_samples": 0,
+        "final_train_loss": 0.023118999258086487,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_6/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_6/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "SENSEX",
+        "fold_idx": 7,
+        "train_samples": 5178,
+        "val_samples": 0,
+        "final_train_loss": 0.025164768379181624,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/SENSEX/fold_7/best.ckpt",
+        "scaler_path": "models/SENSEX/fold_7/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      }
+    ],
+    "GOLD": [
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 0,
+        "train_samples": 2318,
+        "val_samples": 0,
+        "final_train_loss": 0.031280127353966236,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_0/best.ckpt",
+        "scaler_path": "models/GOLD/fold_0/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 1,
+        "train_samples": 2725,
+        "val_samples": 0,
+        "final_train_loss": 0.032500412669919786,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_1/best.ckpt",
+        "scaler_path": "models/GOLD/fold_1/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 2,
+        "train_samples": 3136,
+        "val_samples": 0,
+        "final_train_loss": 0.028662835170204442,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_2/best.ckpt",
+        "scaler_path": "models/GOLD/fold_2/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 3,
+        "train_samples": 3541,
+        "val_samples": 0,
+        "final_train_loss": 0.027339990906141424,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_3/best.ckpt",
+        "scaler_path": "models/GOLD/fold_3/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 4,
+        "train_samples": 3951,
+        "val_samples": 0,
+        "final_train_loss": 0.029053983402748902,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_4/best.ckpt",
+        "scaler_path": "models/GOLD/fold_4/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 5,
+        "train_samples": 4360,
+        "val_samples": 0,
+        "final_train_loss": 0.02507789202911012,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_5/best.ckpt",
+        "scaler_path": "models/GOLD/fold_5/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 6,
+        "train_samples": 4768,
+        "val_samples": 0,
+        "final_train_loss": 0.024802412435009673,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_6/best.ckpt",
+        "scaler_path": "models/GOLD/fold_6/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      },
+      {
+        "asset_name": "GOLD",
+        "fold_idx": 7,
+        "train_samples": 5179,
+        "val_samples": 0,
+        "final_train_loss": 0.02519775675609708,
+        "best_val_loss": null,
+        "total_epochs": 400,
+        "model_path": "models/GOLD/fold_7/best.ckpt",
+        "scaler_path": "models/GOLD/fold_7/scaler.pkl",
+        "model_parameters": {
+          "total_parameters": 804097,
+          "trainable_parameters": 804097,
+          "non_trainable_parameters": 0
+        }
+      }
+    ]
+  }
+}

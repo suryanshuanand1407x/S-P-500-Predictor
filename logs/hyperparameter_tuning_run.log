@@ -1,0 +1,223 @@
+[2025-10-25 00:15:02,426] INFO: ================================================================================
+[2025-10-25 00:15:02,427] INFO: HYPERPARAMETER TUNING - LSTM PRICE PREDICTOR
+[2025-10-25 00:15:02,427] INFO: ================================================================================
+[2025-10-25 00:15:02,445] INFO: Device: mps
+[2025-10-25 00:15:02,445] INFO: Max trials: 20
+[2025-10-25 00:15:02,445] INFO: Search space: {'hidden_size': [64, 128, 256], 'num_layers': [2, 3], 'dropout': [0.1, 0.2, 0.3], 'lr': [0.001, 0.0005, 0.0001], 'batch_size': [128, 256], 'optimizer': ['adam', 'adamw'], 'scheduler': ['cosine', 'plateau']}
+[2025-10-25 00:15:02,445] INFO: Loading processed data...
+[2025-10-25 00:15:02,445] INFO: 
+================================================================================
+[2025-10-25 00:15:02,445] INFO: TUNING HYPERPARAMETERS FOR SENSEX
+[2025-10-25 00:15:02,445] INFO: ================================================================================
+
+[2025-10-25 00:15:02,482] INFO: Calculating technical indicators...
+[2025-10-25 00:15:02,485] INFO: Technical indicators calculated successfully
+[2025-10-25 00:15:02,490] INFO: Data range: 2003-10-15 to 2025-10-21
+[2025-10-25 00:15:02,490] INFO: Test holdout: 2024-04-21 to 2025-10-21
+[2025-10-25 00:15:02,490] INFO: Available for train/val: 2003-10-15 to 2024-04-21
+[2025-10-25 00:15:02,490] INFO: Total available months: 246
+[2025-10-25 00:15:02,490] INFO: Training range: 120 to 245 months
+[2025-10-25 00:15:02,491] INFO: Fold 0: Train 2003-10-15 to 2013-10-15 (2497 samples), Val 2013-10-15 to 2013-11-15 (21 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,491] INFO: Fold 1: Train 2003-10-15 to 2015-03-15 (2843 samples), Val 2015-03-15 to 2015-04-15 (20 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,492] INFO: Fold 2: Train 2003-10-15 to 2016-08-15 (3194 samples), Val 2016-08-15 to 2016-09-15 (21 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,493] INFO: Fold 3: Train 2003-10-15 to 2018-01-15 (3547 samples), Val 2018-01-15 to 2018-02-15 (21 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,494] INFO: Fold 4: Train 2003-10-15 to 2019-06-15 (3894 samples), Val 2019-06-15 to 2019-07-15 (21 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,494] INFO: Fold 5: Train 2003-10-15 to 2020-11-15 (4248 samples), Val 2020-11-15 to 2020-12-15 (20 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,495] INFO: Fold 6: Train 2003-10-15 to 2022-04-15 (4597 samples), Val 2022-04-15 to 2022-05-15 (19 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,496] INFO: Fold 7: Train 2003-10-15 to 2023-09-15 (4951 samples), Val 2023-09-15 to 2023-10-15 (18 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:02,497] INFO: Tuning on fold 4:
+[2025-10-25 00:15:02,497] INFO:   Train: 2003-10-15 to 2019-06-15 (3894 samples)
+[2025-10-25 00:15:02,497] INFO:   Val: 2019-06-15 to 2019-07-15 (21 samples)
+[2025-10-25 00:15:02,497] INFO: Testing 20 hyperparameter combinations
+[2025-10-25 00:15:02,497] INFO: 
+--- Trial 1/20 for SENSEX ---
+[2025-10-25 00:15:02,497] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.3, 'lr': 0.0001, 'batch_size': 128, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,524] ERROR: Trial 1 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,524] INFO: 
+--- Trial 2/20 for SENSEX ---
+[2025-10-25 00:15:02,524] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 3, 'dropout': 0.1, 'lr': 0.001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:02,551] ERROR: Trial 2 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,551] INFO: 
+--- Trial 3/20 for SENSEX ---
+[2025-10-25 00:15:02,551] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0005, 'batch_size': 256, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,577] ERROR: Trial 3 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,577] INFO: 
+--- Trial 4/20 for SENSEX ---
+[2025-10-25 00:15:02,577] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,604] ERROR: Trial 4 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,604] INFO: 
+--- Trial 5/20 for SENSEX ---
+[2025-10-25 00:15:02,604] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.2, 'lr': 0.0005, 'batch_size': 128, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,630] ERROR: Trial 5 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,631] INFO: 
+--- Trial 6/20 for SENSEX ---
+[2025-10-25 00:15:02,631] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 3, 'dropout': 0.3, 'lr': 0.0005, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:02,657] ERROR: Trial 6 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,657] INFO: 
+--- Trial 7/20 for SENSEX ---
+[2025-10-25 00:15:02,657] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.3, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,683] ERROR: Trial 7 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,683] INFO: 
+--- Trial 8/20 for SENSEX ---
+[2025-10-25 00:15:02,683] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.1, 'lr': 0.0005, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,709] ERROR: Trial 8 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,709] INFO: 
+--- Trial 9/20 for SENSEX ---
+[2025-10-25 00:15:02,709] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.3, 'lr': 0.001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:02,735] ERROR: Trial 9 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,735] INFO: 
+--- Trial 10/20 for SENSEX ---
+[2025-10-25 00:15:02,735] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.1, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,761] ERROR: Trial 10 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,761] INFO: 
+--- Trial 11/20 for SENSEX ---
+[2025-10-25 00:15:02,761] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.1, 'lr': 0.0005, 'batch_size': 128, 'optimizer': 'adam', 'scheduler': 'plateau'}
+[2025-10-25 00:15:02,788] ERROR: Trial 11 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,788] INFO: 
+--- Trial 12/20 for SENSEX ---
+[2025-10-25 00:15:02,788] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.3, 'lr': 0.0001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,842] ERROR: Trial 12 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,842] INFO: 
+--- Trial 13/20 for SENSEX ---
+[2025-10-25 00:15:02,842] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.3, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:02,869] ERROR: Trial 13 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,869] INFO: 
+--- Trial 14/20 for SENSEX ---
+[2025-10-25 00:15:02,869] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,896] ERROR: Trial 14 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,896] INFO: 
+--- Trial 15/20 for SENSEX ---
+[2025-10-25 00:15:02,896] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0005, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:02,923] ERROR: Trial 15 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,923] INFO: 
+--- Trial 16/20 for SENSEX ---
+[2025-10-25 00:15:02,923] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adam', 'scheduler': 'plateau'}
+[2025-10-25 00:15:02,949] ERROR: Trial 16 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,949] INFO: 
+--- Trial 17/20 for SENSEX ---
+[2025-10-25 00:15:02,949] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.1, 'lr': 0.0001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:02,976] ERROR: Trial 17 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:02,976] INFO: 
+--- Trial 18/20 for SENSEX ---
+[2025-10-25 00:15:02,976] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 3, 'dropout': 0.1, 'lr': 0.001, 'batch_size': 128, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,002] ERROR: Trial 18 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,002] INFO: 
+--- Trial 19/20 for SENSEX ---
+[2025-10-25 00:15:03,002] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.1, 'lr': 0.0005, 'batch_size': 128, 'optimizer': 'adam', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,030] ERROR: Trial 19 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,030] INFO: 
+--- Trial 20/20 for SENSEX ---
+[2025-10-25 00:15:03,030] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 3, 'dropout': 0.3, 'lr': 0.0001, 'batch_size': 128, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,057] ERROR: Trial 20 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,057] INFO: 
+================================================================================
+[2025-10-25 00:15:03,057] INFO: TUNING HYPERPARAMETERS FOR GOLD
+[2025-10-25 00:15:03,057] INFO: ================================================================================
+
+[2025-10-25 00:15:03,083] INFO: Calculating technical indicators...
+[2025-10-25 00:15:03,087] INFO: Technical indicators calculated successfully
+[2025-10-25 00:15:03,090] INFO: Data range: 2004-06-24 to 2025-09-30
+[2025-10-25 00:15:03,090] INFO: Test holdout: 2024-03-30 to 2025-09-30
+[2025-10-25 00:15:03,090] INFO: Available for train/val: 2004-06-24 to 2024-03-30
+[2025-10-25 00:15:03,090] INFO: Total available months: 237
+[2025-10-25 00:15:03,090] INFO: Training range: 120 to 236 months
+[2025-10-25 00:15:03,091] INFO: Fold 0: Train 2004-06-24 to 2014-06-24 (2556 samples), Val 2014-06-24 to 2014-07-24 (22 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,091] INFO: Fold 1: Train 2004-06-24 to 2015-10-24 (2901 samples), Val 2015-10-24 to 2015-11-24 (22 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,092] INFO: Fold 2: Train 2004-06-24 to 2017-02-24 (3246 samples), Val 2017-02-24 to 2017-03-24 (20 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,093] INFO: Fold 3: Train 2004-06-24 to 2018-06-24 (3587 samples), Val 2018-06-24 to 2018-07-24 (22 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,094] INFO: Fold 4: Train 2004-06-24 to 2019-10-24 (3933 samples), Val 2019-10-24 to 2019-11-24 (21 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,094] INFO: Fold 5: Train 2004-06-24 to 2021-02-24 (4277 samples), Val 2021-02-24 to 2021-03-24 (20 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,095] INFO: Fold 6: Train 2004-06-24 to 2022-06-24 (4621 samples), Val 2022-06-24 to 2022-07-24 (20 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,096] INFO: Fold 7: Train 2004-06-24 to 2023-10-24 (4965 samples), Val 2023-10-24 to 2023-11-24 (23 samples), Test 2024-03-30 to 2025-09-30 (299 samples)
+[2025-10-25 00:15:03,096] INFO: Tuning on fold 4:
+[2025-10-25 00:15:03,096] INFO:   Train: 2004-06-24 to 2019-10-24 (3933 samples)
+[2025-10-25 00:15:03,096] INFO:   Val: 2019-10-24 to 2019-11-24 (21 samples)
+[2025-10-25 00:15:03,097] INFO: Testing 20 hyperparameter combinations
+[2025-10-25 00:15:03,097] INFO: 
+--- Trial 1/20 for GOLD ---
+[2025-10-25 00:15:03,097] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.3, 'lr': 0.0001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,125] ERROR: Trial 1 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,125] INFO: 
+--- Trial 2/20 for GOLD ---
+[2025-10-25 00:15:03,125] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0005, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,153] ERROR: Trial 2 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,153] INFO: 
+--- Trial 3/20 for GOLD ---
+[2025-10-25 00:15:03,153] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0001, 'batch_size': 256, 'optimizer': 'adam', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,181] ERROR: Trial 3 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,181] INFO: 
+--- Trial 4/20 for GOLD ---
+[2025-10-25 00:15:03,181] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.3, 'lr': 0.0001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,208] ERROR: Trial 4 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,208] INFO: 
+--- Trial 5/20 for GOLD ---
+[2025-10-25 00:15:03,208] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,235] ERROR: Trial 5 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,235] INFO: 
+--- Trial 6/20 for GOLD ---
+[2025-10-25 00:15:03,235] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 2, 'dropout': 0.1, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,262] ERROR: Trial 6 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,262] INFO: 
+--- Trial 7/20 for GOLD ---
+[2025-10-25 00:15:03,262] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 3, 'dropout': 0.3, 'lr': 0.0001, 'batch_size': 128, 'optimizer': 'adam', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,289] ERROR: Trial 7 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,289] INFO: 
+--- Trial 8/20 for GOLD ---
+[2025-10-25 00:15:03,289] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,316] ERROR: Trial 8 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,316] INFO: 
+--- Trial 9/20 for GOLD ---
+[2025-10-25 00:15:03,316] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0005, 'batch_size': 256, 'optimizer': 'adam', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,343] ERROR: Trial 9 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,343] INFO: 
+--- Trial 10/20 for GOLD ---
+[2025-10-25 00:15:03,343] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adam', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,370] ERROR: Trial 10 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,370] INFO: 
+--- Trial 11/20 for GOLD ---
+[2025-10-25 00:15:03,370] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 2, 'dropout': 0.1, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,397] ERROR: Trial 11 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,397] INFO: 
+--- Trial 12/20 for GOLD ---
+[2025-10-25 00:15:03,397] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.1, 'lr': 0.001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,423] ERROR: Trial 12 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,423] INFO: 
+--- Trial 13/20 for GOLD ---
+[2025-10-25 00:15:03,423] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.3, 'lr': 0.001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,450] ERROR: Trial 13 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,450] INFO: 
+--- Trial 14/20 for GOLD ---
+[2025-10-25 00:15:03,450] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 3, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,477] ERROR: Trial 14 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,477] INFO: 
+--- Trial 15/20 for GOLD ---
+[2025-10-25 00:15:03,477] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.3, 'lr': 0.0001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,504] ERROR: Trial 15 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,504] INFO: 
+--- Trial 16/20 for GOLD ---
+[2025-10-25 00:15:03,504] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 3, 'dropout': 0.2, 'lr': 0.0001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'plateau'}
+[2025-10-25 00:15:03,531] ERROR: Trial 16 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,531] INFO: 
+--- Trial 17/20 for GOLD ---
+[2025-10-25 00:15:03,531] INFO: Testing hyperparameters: {'hidden_size': 64, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,559] ERROR: Trial 17 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,559] INFO: 
+--- Trial 18/20 for GOLD ---
+[2025-10-25 00:15:03,559] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 3, 'dropout': 0.1, 'lr': 0.001, 'batch_size': 256, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,587] ERROR: Trial 18 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,588] INFO: 
+--- Trial 19/20 for GOLD ---
+[2025-10-25 00:15:03,588] INFO: Testing hyperparameters: {'hidden_size': 128, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,615] ERROR: Trial 19 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,615] INFO: 
+--- Trial 20/20 for GOLD ---
+[2025-10-25 00:15:03,615] INFO: Testing hyperparameters: {'hidden_size': 256, 'num_layers': 2, 'dropout': 0.2, 'lr': 0.0001, 'batch_size': 128, 'optimizer': 'adamw', 'scheduler': 'cosine'}
+[2025-10-25 00:15:03,643] ERROR: Trial 20 failed: add_cross_asset_features() takes 2 positional arguments but 4 were given
+[2025-10-25 00:15:03,643] INFO: 
+================================================================================
+[2025-10-25 00:15:03,643] INFO: HYPERPARAMETER TUNING COMPLETE
+[2025-10-25 00:15:03,643] INFO: ================================================================================
+[2025-10-25 00:15:03,643] WARNING: No successful trials for SENSEX
+[2025-10-25 00:15:03,643] WARNING: No successful trials for GOLD
+[2025-10-25 00:15:03,643] INFO: 
+Results saved to: reports/hyperparameter_tuning_results.json

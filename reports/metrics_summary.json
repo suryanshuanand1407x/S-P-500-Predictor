@@ -1,0 +1,16 @@
+{
+  "SENSEX": {
+    "rmse_inr": "49683.93 \u00b1 9012.35",
+    "mae_inr": "49615.28 \u00b1 9022.65",
+    "mape_percent": "61.9% \u00b1 11.3%",
+    "directional_accuracy_percent": "49.9% \u00b1 2.6%",
+    "r2_score": "-368.197 \u00b1 126.021"
+  },
+  "GOLD": {
+    "rmse_inr": "1251.29 \u00b1 87.13",
+    "mae_inr": "1217.77 \u00b1 89.84",
+    "mape_percent": "43.0% \u00b1 3.2%",
+    "directional_accuracy_percent": "48.9% \u00b1 2.3%",
+    "r2_score": "-16.335 \u00b1 2.357"
+  }
+}

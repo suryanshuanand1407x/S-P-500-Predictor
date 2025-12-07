@@ -1,0 +1,10 @@
+[2025-10-25 10:48:06,954] INFO: Sensex & Gold LSTM Price Predictor starting...
+[2025-10-25 10:48:06,954] INFO: 📋 Loading configuration from: configs/tuned.yaml
+[2025-10-25 10:48:06,956] INFO: ✅ Configuration validated successfully
+[2025-10-25 10:48:06,956] INFO: 🔍 Checking system requirements...
+[2025-10-25 10:48:08,862] INFO: ✅ MPS (Apple Silicon) acceleration available
+[2025-10-25 10:48:08,862] INFO: ✅ System requirements check passed
+[2025-10-25 10:48:08,862] INFO: 📁 Directory structure verified
+[2025-10-25 10:48:08,862] INFO: 🚀 Starting LSTM training pipeline...
+[2025-10-25 10:48:08,862] INFO: 📋 Configuration: configs/tuned.yaml
+[2025-10-25 12:03:34,250] INFO: ✅ Training pipeline completed successfully

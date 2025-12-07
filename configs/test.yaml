@@ -1,0 +1,32 @@
+paths:
+  sp_raw_glob: "data/sp/*.csv"
+  sp_clean: "data/processed/sp_clean.csv"
+  reports_dir: "reports"
+  models_dir: "models"
+  logs_dir: "logs"
+
+training:
+  asset_list: ["SP"]  # Only test SP for quick validation
+  seq_len: 30             # Shorter sequence for faster training
+  horizon_days: 1
+  features: ["Close","Open","High","Low","ret_1d","vol_10d","zscore_20d","rsi_14","ema_10","ema_20"]
+  batch_size: 64          # Smaller batch size
+  epochs: 10              # Very few epochs for quick test
+  lr: 0.001
+  hidden_size: 64         # Smaller model
+  num_layers: 2
+  dropout: 0.2
+  early_stop_patience: 5
+  optimizer: "adamw"
+  scheduler: "cosine"
+  seed: 42
+  device: "mps"
+
+cv:
+  n_folds: 2              # Only 2 folds for quick test
+  train_min_years: 5      # Lower requirement for test
+  val_months: 1
+  test_holdout_months: 6  # Shorter test period for quick test
+  step_months: 1
+  min_rows_required: 1000  # Lower requirement for test
+  min_years_required: 15   # Lower requirement for test

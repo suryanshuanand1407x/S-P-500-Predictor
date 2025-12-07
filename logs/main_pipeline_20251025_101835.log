@@ -1,0 +1,11 @@
+[2025-10-25 10:18:35,336] INFO: Sensex & Gold LSTM Price Predictor starting...
+[2025-10-25 10:18:35,336] INFO: 📋 Loading configuration from: configs/tuned.yaml
+[2025-10-25 10:18:35,339] INFO: ✅ Configuration validated successfully
+[2025-10-25 10:18:35,339] INFO: 🔍 Checking system requirements...
+[2025-10-25 10:18:38,189] INFO: ✅ MPS (Apple Silicon) acceleration available
+[2025-10-25 10:18:38,189] INFO: ✅ System requirements check passed
+[2025-10-25 10:18:38,189] INFO: 📁 Directory structure verified
+[2025-10-25 10:18:38,189] INFO: 🧪 Starting backtest validation pipeline...
+[2025-10-25 10:18:45,571] ERROR: ❌ Backtest validation pipeline failed: 'failed_checks'
+[2025-10-25 10:18:45,571] ERROR: 
+💥 Pipeline failed with error: 'failed_checks'

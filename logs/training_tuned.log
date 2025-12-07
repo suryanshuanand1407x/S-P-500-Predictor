@@ -1,0 +1,1147 @@
+[2025-10-25 00:15:54,579] INFO: Sensex & Gold LSTM Price Predictor starting...
+[2025-10-25 00:15:54,579] INFO: 📋 Loading configuration from: configs/tuned.yaml
+[2025-10-25 00:15:54,581] INFO: ✅ Configuration validated successfully
+[2025-10-25 00:15:54,581] INFO: 🔍 Checking system requirements...
+[2025-10-25 00:15:56,252] INFO: ✅ MPS (Apple Silicon) acceleration available
+[2025-10-25 00:15:56,252] INFO: ✅ System requirements check passed
+[2025-10-25 00:15:56,252] INFO: 📁 Directory structure verified
+[2025-10-25 00:15:56,252] INFO: 🚀 Starting LSTM training pipeline...
+[2025-10-25 00:15:56,252] INFO: 📋 Configuration: configs/tuned.yaml
+[2025-10-25 00:15:56,337] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-25 00:15:56,337] INFO: Configuration: configs/tuned.yaml
+[2025-10-25 00:15:56,339] INFO: Random seed set to 42
+[2025-10-25 00:15:56,339] INFO: Using device: mps
+[2025-10-25 00:15:56,339] INFO: Step 1: Verifying real data integrity...
+[2025-10-25 00:15:56,415] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-25 00:15:56,415] INFO: Starting data ingestion pipeline
+[2025-10-25 00:15:56,415] INFO: Processing SENSEX data from data/sensex/*.csv
+[2025-10-25 00:15:56,415] INFO: Found 1 CSV files for SENSEX
+[2025-10-25 00:15:56,415] INFO: Loading data/sensex/SENSEX_01102003_23102025.csv
+[2025-10-25 00:15:56,424] INFO: Combined data: 5478 rows
+[2025-10-25 00:15:56,426] INFO: After cleaning: 5478 rows
+[2025-10-25 00:15:56,427] WARNING: Found 2 extreme price moves for SENSEX
+[2025-10-25 00:15:56,431] INFO: Extreme moves:            Date     Close  daily_return
+2480 2013-09-06  72643.43      2.827416
+2481 2013-09-10  19997.09     -0.724723
+[2025-10-25 00:15:56,431] WARNING: Replacing 2 clearly erroneous data points with interpolation
+[2025-10-25 00:15:56,434] INFO: Processed SENSEX to 5478 days (keeping original trading calendar)
+[2025-10-25 00:15:56,434] INFO: After resampling: 5478 rows
+[2025-10-25 00:15:56,478] INFO: Saved processed SENSEX data to data/processed/sensex_clean.csv
+[2025-10-25 00:15:56,479] INFO: ✅ Sensex processing completed
+[2025-10-25 00:15:56,479] INFO: Processing GOLD data from data/gold/XAU_1d_data.csv
+[2025-10-25 00:15:56,479] INFO: Found 1 CSV files for GOLD
+[2025-10-25 00:15:56,479] INFO: Loading data/gold/XAU_1d_data.csv
+[2025-10-25 00:15:56,482] INFO: Combined data: 5383 rows
+[2025-10-25 00:15:56,484] INFO: After cleaning: 5383 rows
+[2025-10-25 00:15:56,486] INFO: Processed GOLD to 5383 days (keeping original trading calendar)
+[2025-10-25 00:15:56,486] INFO: After resampling: 5383 rows
+[2025-10-25 00:15:56,510] INFO: Saved processed GOLD data to data/processed/gold_clean.csv
+[2025-10-25 00:15:56,510] INFO: ✅ Gold processing completed
+[2025-10-25 00:15:56,510] INFO: Data ingestion pipeline completed successfully
+[2025-10-25 00:15:56,510] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-25 00:15:56,525] INFO: Data range: 2003-10-01 to 2025-10-21
+[2025-10-25 00:15:56,525] INFO: Test holdout: 2024-04-21 to 2025-10-21
+[2025-10-25 00:15:56,525] INFO: Available for train/val: 2003-10-01 to 2024-04-21
+[2025-10-25 00:15:56,525] INFO: Total available months: 246
+[2025-10-25 00:15:56,525] INFO: Training range: 120 to 245 months
+[2025-10-25 00:15:56,525] INFO: Fold 0: Train 2003-10-01 to 2013-10-01 (2497 samples), Val 2013-10-01 to 2013-11-01 (21 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,526] INFO: Fold 1: Train 2003-10-01 to 2015-03-01 (2843 samples), Val 2015-03-01 to 2015-04-01 (22 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,527] INFO: Fold 2: Train 2003-10-01 to 2016-08-01 (3194 samples), Val 2016-08-01 to 2016-09-01 (22 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,528] INFO: Fold 3: Train 2003-10-01 to 2018-01-01 (3546 samples), Val 2018-01-01 to 2018-02-01 (22 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,528] INFO: Fold 4: Train 2003-10-01 to 2019-06-01 (3894 samples), Val 2019-06-01 to 2019-07-01 (20 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,529] INFO: Fold 5: Train 2003-10-01 to 2020-11-01 (4246 samples), Val 2020-11-01 to 2020-12-01 (21 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,530] INFO: Fold 6: Train 2003-10-01 to 2022-04-01 (4598 samples), Val 2022-04-01 to 2022-05-01 (18 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,530] INFO: Fold 7: Train 2003-10-01 to 2023-09-01 (4950 samples), Val 2023-09-01 to 2023-10-01 (19 samples), Test 2024-04-21 to 2025-10-21 (375 samples)
+[2025-10-25 00:15:56,530] INFO: Step 4: Training LSTM models...
+[2025-10-25 00:15:56,530] INFO: 
+=== Training SENSEX models ===
+[2025-10-25 00:15:56,530] INFO: Training SENSEX fold 0
+[2025-10-25 00:15:56,530] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:15:56,543] INFO: Calculating technical indicators...
+[2025-10-25 00:15:56,544] INFO: Calculating technical indicators...
+[2025-10-25 00:15:56,547] INFO: Technical indicators calculated successfully
+[2025-10-25 00:15:56,547] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:15:56,554] INFO: Created 2437 sequences of length 60
+[2025-10-25 00:15:56,554] INFO: Feature shape: (2437, 60, 13), Target shape: (2437,)
+[2025-10-25 00:15:56,566] INFO: Scalers fitted on training data
+[2025-10-25 00:15:56,566] INFO: Feature scaler mean: [13782.36470963 13891.84621099 13650.9500746 ]...
+[2025-10-25 00:15:56,566] INFO: Target scaler mean: 13949.39, std: 4806.77
+[2025-10-25 00:15:56,576] INFO: Created 2900 sequences of length 60
+[2025-10-25 00:15:56,576] INFO: Feature shape: (2900, 60, 13), Target shape: (2900,)
+[2025-10-25 00:15:56,584] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:15:56,585] INFO: Training samples: 2437
+[2025-10-25 00:15:56,590] INFO: Dataset initialized: 2437 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:15:56,590] INFO: Training DataLoader: 2437 samples, 19 batches of size 128
+[2025-10-25 00:15:56,609] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:15:56,609] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:15:57,233] INFO: Starting training for 400 epochs
+[2025-10-25 00:16:02,374] INFO: Epoch 10: Train Loss 0.0034
+[2025-10-25 00:16:06,833] INFO: Epoch 20: Train Loss 0.0026
+[2025-10-25 00:16:11,308] INFO: Epoch 30: Train Loss 0.0024
+[2025-10-25 00:16:15,784] INFO: Epoch 40: Train Loss 0.0023
+[2025-10-25 00:16:20,270] INFO: Epoch 50: Train Loss 0.0021
+[2025-10-25 00:16:24,742] INFO: Epoch 60: Train Loss 0.0022
+[2025-10-25 00:16:29,205] INFO: Epoch 70: Train Loss 0.0020
+[2025-10-25 00:16:33,657] INFO: Epoch 80: Train Loss 0.0019
+[2025-10-25 00:16:38,141] INFO: Epoch 90: Train Loss 0.0019
+[2025-10-25 00:16:42,608] INFO: Epoch 100: Train Loss 0.0017
+[2025-10-25 00:16:47,074] INFO: Epoch 110: Train Loss 0.0016
+[2025-10-25 00:16:51,552] INFO: Epoch 120: Train Loss 0.0015
+[2025-10-25 00:16:56,022] INFO: Epoch 130: Train Loss 0.0012
+[2025-10-25 00:17:00,491] INFO: Epoch 140: Train Loss 0.0013
+[2025-10-25 00:17:04,969] INFO: Epoch 150: Train Loss 0.0012
+[2025-10-25 00:17:09,449] INFO: Epoch 160: Train Loss 0.0010
+[2025-10-25 00:17:13,923] INFO: Epoch 170: Train Loss 0.0010
+[2025-10-25 00:17:18,395] INFO: Epoch 180: Train Loss 0.0009
+[2025-10-25 00:17:22,865] INFO: Epoch 190: Train Loss 0.0008
+[2025-10-25 00:17:27,348] INFO: Epoch 200: Train Loss 0.0007
+[2025-10-25 00:17:31,825] INFO: Epoch 210: Train Loss 0.0007
+[2025-10-25 00:17:36,307] INFO: Epoch 220: Train Loss 0.0006
+[2025-10-25 00:17:40,784] INFO: Epoch 230: Train Loss 0.0006
+[2025-10-25 00:17:45,260] INFO: Epoch 240: Train Loss 0.0006
+[2025-10-25 00:17:49,730] INFO: Epoch 250: Train Loss 0.0006
+[2025-10-25 00:17:54,201] INFO: Epoch 260: Train Loss 0.0005
+[2025-10-25 00:17:58,684] INFO: Epoch 270: Train Loss 0.0005
+[2025-10-25 00:18:03,166] INFO: Epoch 280: Train Loss 0.0005
+[2025-10-25 00:18:07,641] INFO: Epoch 290: Train Loss 0.0004
+[2025-10-25 00:18:12,115] INFO: Epoch 300: Train Loss 0.0004
+[2025-10-25 00:18:16,660] INFO: Epoch 310: Train Loss 0.0004
+[2025-10-25 00:18:21,198] INFO: Epoch 320: Train Loss 0.0004
+[2025-10-25 00:18:25,738] INFO: Epoch 330: Train Loss 0.0004
+[2025-10-25 00:18:30,278] INFO: Epoch 340: Train Loss 0.0004
+[2025-10-25 00:18:34,819] INFO: Epoch 350: Train Loss 0.0004
+[2025-10-25 00:18:39,363] INFO: Epoch 360: Train Loss 0.0004
+[2025-10-25 00:18:43,896] INFO: Epoch 370: Train Loss 0.0004
+[2025-10-25 00:18:48,439] INFO: Epoch 380: Train Loss 0.0004
+[2025-10-25 00:18:52,979] INFO: Epoch 390: Train Loss 0.0004
+[2025-10-25 00:18:57,524] INFO: Epoch 400: Train Loss 0.0003
+[2025-10-25 00:18:57,557] INFO: ✅ Saved artifacts for SENSEX fold 0 to models/SENSEX/fold_0
+[2025-10-25 00:18:57,557] INFO:    - Features: 13
+[2025-10-25 00:18:57,557] INFO:    - Sequence length: 60
+[2025-10-25 00:18:57,557] INFO:    - Model parameters: 804,097
+[2025-10-25 00:18:57,557] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_0
+[2025-10-25 00:18:57,557] INFO: Completed SENSEX fold 0: Train samples 2437, Final train loss 0.0003
+[2025-10-25 00:18:57,558] INFO: Training SENSEX fold 1
+[2025-10-25 00:18:57,558] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:18:57,583] INFO: Calculating technical indicators...
+[2025-10-25 00:18:57,583] INFO: Calculating technical indicators...
+[2025-10-25 00:18:57,587] INFO: Technical indicators calculated successfully
+[2025-10-25 00:18:57,588] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:18:57,597] INFO: Created 2783 sequences of length 60
+[2025-10-25 00:18:57,597] INFO: Feature shape: (2783, 60, 13), Target shape: (2783,)
+[2025-10-25 00:18:57,612] INFO: Scalers fitted on training data
+[2025-10-25 00:18:57,612] INFO: Feature scaler mean: [15004.279702   15115.13406908 14871.37997041]...
+[2025-10-25 00:18:57,612] INFO: Target scaler mean: 15250.56, std: 5771.31
+[2025-10-25 00:18:57,626] INFO: Created 2553 sequences of length 60
+[2025-10-25 00:18:57,626] INFO: Feature shape: (2553, 60, 13), Target shape: (2553,)
+[2025-10-25 00:18:57,634] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:18:57,634] INFO: Training samples: 2783
+[2025-10-25 00:18:57,636] INFO: Dataset initialized: 2783 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:18:57,637] INFO: Training DataLoader: 2783 samples, 21 batches of size 128
+[2025-10-25 00:18:57,655] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:18:57,655] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:18:57,658] INFO: Starting training for 400 epochs
+[2025-10-25 00:19:02,662] INFO: Epoch 10: Train Loss 0.0026
+[2025-10-25 00:19:07,675] INFO: Epoch 20: Train Loss 0.0029
+[2025-10-25 00:19:12,654] INFO: Epoch 30: Train Loss 0.0019
+[2025-10-25 00:19:17,666] INFO: Epoch 40: Train Loss 0.0019
+[2025-10-25 00:19:22,670] INFO: Epoch 50: Train Loss 0.0016
+[2025-10-25 00:19:27,680] INFO: Epoch 60: Train Loss 0.0017
+[2025-10-25 00:19:32,687] INFO: Epoch 70: Train Loss 0.0017
+[2025-10-25 00:19:37,702] INFO: Epoch 80: Train Loss 0.0015
+[2025-10-25 00:19:42,701] INFO: Epoch 90: Train Loss 0.0014
+[2025-10-25 00:19:47,713] INFO: Epoch 100: Train Loss 0.0012
+[2025-10-25 00:19:52,727] INFO: Epoch 110: Train Loss 0.0011
+[2025-10-25 00:19:57,722] INFO: Epoch 120: Train Loss 0.0010
+[2025-10-25 00:20:02,701] INFO: Epoch 130: Train Loss 0.0011
+[2025-10-25 00:20:07,698] INFO: Epoch 140: Train Loss 0.0009
+[2025-10-25 00:20:12,696] INFO: Epoch 150: Train Loss 0.0009
+[2025-10-25 00:20:17,694] INFO: Epoch 160: Train Loss 0.0008
+[2025-10-25 00:20:22,692] INFO: Epoch 170: Train Loss 0.0008
+[2025-10-25 00:20:27,706] INFO: Epoch 180: Train Loss 0.0008
+[2025-10-25 00:20:32,719] INFO: Epoch 190: Train Loss 0.0008
+[2025-10-25 00:20:37,734] INFO: Epoch 200: Train Loss 0.0006
+[2025-10-25 00:20:42,747] INFO: Epoch 210: Train Loss 0.0006
+[2025-10-25 00:20:47,762] INFO: Epoch 220: Train Loss 0.0006
+[2025-10-25 00:20:52,761] INFO: Epoch 230: Train Loss 0.0006
+[2025-10-25 00:20:57,776] INFO: Epoch 240: Train Loss 0.0005
+[2025-10-25 00:21:02,785] INFO: Epoch 250: Train Loss 0.0005
+[2025-10-25 00:21:07,796] INFO: Epoch 260: Train Loss 0.0004
+[2025-10-25 00:21:12,812] INFO: Epoch 270: Train Loss 0.0005
+[2025-10-25 00:21:17,825] INFO: Epoch 280: Train Loss 0.0004
+[2025-10-25 00:21:22,837] INFO: Epoch 290: Train Loss 0.0004
+[2025-10-25 00:21:27,853] INFO: Epoch 300: Train Loss 0.0004
+[2025-10-25 00:21:32,867] INFO: Epoch 310: Train Loss 0.0004
+[2025-10-25 00:21:37,881] INFO: Epoch 320: Train Loss 0.0004
+[2025-10-25 00:21:42,889] INFO: Epoch 330: Train Loss 0.0003
+[2025-10-25 00:21:47,903] INFO: Epoch 340: Train Loss 0.0003
+[2025-10-25 00:21:52,913] INFO: Epoch 350: Train Loss 0.0003
+[2025-10-25 00:21:57,925] INFO: Epoch 360: Train Loss 0.0003
+[2025-10-25 00:22:02,945] INFO: Epoch 370: Train Loss 0.0003
+[2025-10-25 00:22:07,960] INFO: Epoch 380: Train Loss 0.0003
+[2025-10-25 00:22:12,954] INFO: Epoch 390: Train Loss 0.0003
+[2025-10-25 00:22:17,982] INFO: Epoch 400: Train Loss 0.0003
+[2025-10-25 00:22:18,005] INFO: ✅ Saved artifacts for SENSEX fold 1 to models/SENSEX/fold_1
+[2025-10-25 00:22:18,005] INFO:    - Features: 13
+[2025-10-25 00:22:18,005] INFO:    - Sequence length: 60
+[2025-10-25 00:22:18,005] INFO:    - Model parameters: 804,097
+[2025-10-25 00:22:18,005] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_1
+[2025-10-25 00:22:18,005] INFO: Completed SENSEX fold 1: Train samples 2783, Final train loss 0.0003
+[2025-10-25 00:22:18,005] INFO: Training SENSEX fold 2
+[2025-10-25 00:22:18,005] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:22:18,022] INFO: Calculating technical indicators...
+[2025-10-25 00:22:18,022] INFO: Calculating technical indicators...
+[2025-10-25 00:22:18,025] INFO: Technical indicators calculated successfully
+[2025-10-25 00:22:18,025] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:22:18,034] INFO: Created 3134 sequences of length 60
+[2025-10-25 00:22:18,034] INFO: Feature shape: (3134, 60, 13), Target shape: (3134,)
+[2025-10-25 00:22:18,050] INFO: Scalers fitted on training data
+[2025-10-25 00:22:18,050] INFO: Feature scaler mean: [16307.76355164 16420.60323951 16166.86579862]...
+[2025-10-25 00:22:18,050] INFO: Target scaler mean: 16508.13, std: 6506.91
+[2025-10-25 00:22:18,064] INFO: Created 2202 sequences of length 60
+[2025-10-25 00:22:18,064] INFO: Feature shape: (2202, 60, 13), Target shape: (2202,)
+[2025-10-25 00:22:18,072] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:22:18,072] INFO: Training samples: 3134
+[2025-10-25 00:22:18,073] INFO: Dataset initialized: 3134 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:22:18,073] INFO: Training DataLoader: 3134 samples, 24 batches of size 128
+[2025-10-25 00:22:18,091] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:22:18,091] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:22:18,094] INFO: Starting training for 400 epochs
+[2025-10-25 00:22:23,791] INFO: Epoch 10: Train Loss 0.0021
+[2025-10-25 00:22:29,502] INFO: Epoch 20: Train Loss 0.0018
+[2025-10-25 00:22:35,204] INFO: Epoch 30: Train Loss 0.0017
+[2025-10-25 00:22:40,911] INFO: Epoch 40: Train Loss 0.0017
+[2025-10-25 00:22:46,617] INFO: Epoch 50: Train Loss 0.0015
+[2025-10-25 00:22:52,316] INFO: Epoch 60: Train Loss 0.0014
+[2025-10-25 00:22:58,020] INFO: Epoch 70: Train Loss 0.0013
+[2025-10-25 00:23:03,726] INFO: Epoch 80: Train Loss 0.0013
+[2025-10-25 00:23:09,429] INFO: Epoch 90: Train Loss 0.0012
+[2025-10-25 00:23:15,133] INFO: Epoch 100: Train Loss 0.0011
+[2025-10-25 00:23:20,841] INFO: Epoch 110: Train Loss 0.0011
+[2025-10-25 00:23:26,545] INFO: Epoch 120: Train Loss 0.0012
+[2025-10-25 00:23:32,251] INFO: Epoch 130: Train Loss 0.0010
+[2025-10-25 00:23:37,957] INFO: Epoch 140: Train Loss 0.0009
+[2025-10-25 00:23:43,662] INFO: Epoch 150: Train Loss 0.0009
+[2025-10-25 00:23:49,374] INFO: Epoch 160: Train Loss 0.0007
+[2025-10-25 00:23:55,071] INFO: Epoch 170: Train Loss 0.0007
+[2025-10-25 00:24:00,739] INFO: Epoch 180: Train Loss 0.0007
+[2025-10-25 00:24:06,411] INFO: Epoch 190: Train Loss 0.0006
+[2025-10-25 00:24:12,109] INFO: Epoch 200: Train Loss 0.0006
+[2025-10-25 00:24:17,820] INFO: Epoch 210: Train Loss 0.0005
+[2025-10-25 00:24:23,530] INFO: Epoch 220: Train Loss 0.0005
+[2025-10-25 00:24:29,244] INFO: Epoch 230: Train Loss 0.0005
+[2025-10-25 00:24:34,961] INFO: Epoch 240: Train Loss 0.0004
+[2025-10-25 00:24:40,675] INFO: Epoch 250: Train Loss 0.0004
+[2025-10-25 00:24:46,386] INFO: Epoch 260: Train Loss 0.0004
+[2025-10-25 00:24:52,102] INFO: Epoch 270: Train Loss 0.0004
+[2025-10-25 00:24:57,813] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 00:25:03,526] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 00:25:09,243] INFO: Epoch 300: Train Loss 0.0003
+[2025-10-25 00:25:14,944] INFO: Epoch 310: Train Loss 0.0003
+[2025-10-25 00:25:20,660] INFO: Epoch 320: Train Loss 0.0003
+[2025-10-25 00:25:26,367] INFO: Epoch 330: Train Loss 0.0003
+[2025-10-25 00:25:32,080] INFO: Epoch 340: Train Loss 0.0003
+[2025-10-25 00:25:37,793] INFO: Epoch 350: Train Loss 0.0003
+[2025-10-25 00:25:43,497] INFO: Epoch 360: Train Loss 0.0003
+[2025-10-25 00:25:49,212] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 00:25:54,924] INFO: Epoch 380: Train Loss 0.0003
+[2025-10-25 00:26:00,632] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 00:26:06,344] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 00:26:06,369] INFO: ✅ Saved artifacts for SENSEX fold 2 to models/SENSEX/fold_2
+[2025-10-25 00:26:06,369] INFO:    - Features: 13
+[2025-10-25 00:26:06,369] INFO:    - Sequence length: 60
+[2025-10-25 00:26:06,369] INFO:    - Model parameters: 804,097
+[2025-10-25 00:26:06,369] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_2
+[2025-10-25 00:26:06,369] INFO: Completed SENSEX fold 2: Train samples 3134, Final train loss 0.0002
+[2025-10-25 00:26:06,369] INFO: Training SENSEX fold 3
+[2025-10-25 00:26:06,369] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:26:06,388] INFO: Calculating technical indicators...
+[2025-10-25 00:26:06,388] INFO: Calculating technical indicators...
+[2025-10-25 00:26:06,392] INFO: Technical indicators calculated successfully
+[2025-10-25 00:26:06,392] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:26:06,400] INFO: Created 3486 sequences of length 60
+[2025-10-25 00:26:06,400] INFO: Feature shape: (3486, 60, 13), Target shape: (3486,)
+[2025-10-25 00:26:06,416] INFO: Scalers fitted on training data
+[2025-10-25 00:26:06,416] INFO: Feature scaler mean: [17632.32093987 17744.06913205 17491.28671907]...
+[2025-10-25 00:26:06,416] INFO: Target scaler mean: 17863.50, std: 7413.02
+[2025-10-25 00:26:06,428] INFO: Created 1850 sequences of length 60
+[2025-10-25 00:26:06,428] INFO: Feature shape: (1850, 60, 13), Target shape: (1850,)
+[2025-10-25 00:26:06,432] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:26:06,432] INFO: Training samples: 3486
+[2025-10-25 00:26:06,433] INFO: Dataset initialized: 3486 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:26:06,433] INFO: Training DataLoader: 3486 samples, 27 batches of size 128
+[2025-10-25 00:26:06,450] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:26:06,450] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:26:06,452] INFO: Starting training for 400 epochs
+[2025-10-25 00:26:12,821] INFO: Epoch 10: Train Loss 0.0021
+[2025-10-25 00:26:19,204] INFO: Epoch 20: Train Loss 0.0015
+[2025-10-25 00:26:25,587] INFO: Epoch 30: Train Loss 0.0013
+[2025-10-25 00:26:31,967] INFO: Epoch 40: Train Loss 0.0011
+[2025-10-25 00:26:38,354] INFO: Epoch 50: Train Loss 0.0011
+[2025-10-25 00:26:44,725] INFO: Epoch 60: Train Loss 0.0011
+[2025-10-25 00:26:51,105] INFO: Epoch 70: Train Loss 0.0010
+[2025-10-25 00:26:57,487] INFO: Epoch 80: Train Loss 0.0009
+[2025-10-25 00:27:03,866] INFO: Epoch 90: Train Loss 0.0011
+[2025-10-25 00:27:10,243] INFO: Epoch 100: Train Loss 0.0010
+[2025-10-25 00:27:16,633] INFO: Epoch 110: Train Loss 0.0009
+[2025-10-25 00:27:23,022] INFO: Epoch 120: Train Loss 0.0009
+[2025-10-25 00:27:29,409] INFO: Epoch 130: Train Loss 0.0008
+[2025-10-25 00:27:35,801] INFO: Epoch 140: Train Loss 0.0007
+[2025-10-25 00:27:42,193] INFO: Epoch 150: Train Loss 0.0007
+[2025-10-25 00:27:48,584] INFO: Epoch 160: Train Loss 0.0006
+[2025-10-25 00:27:54,972] INFO: Epoch 170: Train Loss 0.0006
+[2025-10-25 00:28:01,361] INFO: Epoch 180: Train Loss 0.0006
+[2025-10-25 00:28:07,752] INFO: Epoch 190: Train Loss 0.0005
+[2025-10-25 00:28:14,142] INFO: Epoch 200: Train Loss 0.0005
+[2025-10-25 00:28:20,538] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 00:28:26,934] INFO: Epoch 220: Train Loss 0.0004
+[2025-10-25 00:28:33,329] INFO: Epoch 230: Train Loss 0.0004
+[2025-10-25 00:28:39,714] INFO: Epoch 240: Train Loss 0.0004
+[2025-10-25 00:28:46,108] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 00:28:52,502] INFO: Epoch 260: Train Loss 0.0003
+[2025-10-25 00:28:58,921] INFO: Epoch 270: Train Loss 0.0003
+[2025-10-25 00:29:05,343] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 00:29:11,746] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 00:29:18,175] INFO: Epoch 300: Train Loss 0.0003
+[2025-10-25 00:29:24,589] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 00:29:31,009] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 00:29:37,440] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 00:29:43,865] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 00:29:50,289] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 00:29:56,713] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 00:30:03,119] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 00:30:09,549] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 00:30:15,971] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 00:30:22,397] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 00:30:22,422] INFO: ✅ Saved artifacts for SENSEX fold 3 to models/SENSEX/fold_3
+[2025-10-25 00:30:22,422] INFO:    - Features: 13
+[2025-10-25 00:30:22,422] INFO:    - Sequence length: 60
+[2025-10-25 00:30:22,422] INFO:    - Model parameters: 804,097
+[2025-10-25 00:30:22,422] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_3
+[2025-10-25 00:30:22,422] INFO: Completed SENSEX fold 3: Train samples 3486, Final train loss 0.0002
+[2025-10-25 00:30:22,422] INFO: Training SENSEX fold 4
+[2025-10-25 00:30:22,422] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:30:22,441] INFO: Calculating technical indicators...
+[2025-10-25 00:30:22,441] INFO: Calculating technical indicators...
+[2025-10-25 00:30:22,445] INFO: Technical indicators calculated successfully
+[2025-10-25 00:30:22,445] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:30:22,454] INFO: Created 3834 sequences of length 60
+[2025-10-25 00:30:22,454] INFO: Feature shape: (3834, 60, 13), Target shape: (3834,)
+[2025-10-25 00:30:22,476] INFO: Scalers fitted on training data
+[2025-10-25 00:30:22,476] INFO: Feature scaler mean: [19262.07031725 19376.36006885 19114.2307869 ]...
+[2025-10-25 00:30:22,476] INFO: Target scaler mean: 19509.84, std: 8795.76
+[2025-10-25 00:30:22,489] INFO: Created 1504 sequences of length 60
+[2025-10-25 00:30:22,489] INFO: Feature shape: (1504, 60, 13), Target shape: (1504,)
+[2025-10-25 00:30:22,493] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:30:22,493] INFO: Training samples: 3834
+[2025-10-25 00:30:22,495] INFO: Dataset initialized: 3834 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:30:22,495] INFO: Training DataLoader: 3834 samples, 29 batches of size 128
+[2025-10-25 00:30:22,512] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:30:22,512] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:30:22,519] INFO: Starting training for 400 epochs
+[2025-10-25 00:30:29,468] INFO: Epoch 10: Train Loss 0.0015
+[2025-10-25 00:30:36,434] INFO: Epoch 20: Train Loss 0.0012
+[2025-10-25 00:30:43,395] INFO: Epoch 30: Train Loss 0.0012
+[2025-10-25 00:30:50,356] INFO: Epoch 40: Train Loss 0.0012
+[2025-10-25 00:30:57,319] INFO: Epoch 50: Train Loss 0.0010
+[2025-10-25 00:31:04,271] INFO: Epoch 60: Train Loss 0.0010
+[2025-10-25 00:31:11,231] INFO: Epoch 70: Train Loss 0.0009
+[2025-10-25 00:31:18,197] INFO: Epoch 80: Train Loss 0.0009
+[2025-10-25 00:31:25,158] INFO: Epoch 90: Train Loss 0.0008
+[2025-10-25 00:31:32,120] INFO: Epoch 100: Train Loss 0.0010
+[2025-10-25 00:31:39,080] INFO: Epoch 110: Train Loss 0.0008
+[2025-10-25 00:31:46,034] INFO: Epoch 120: Train Loss 0.0007
+[2025-10-25 00:31:52,994] INFO: Epoch 130: Train Loss 0.0007
+[2025-10-25 00:31:59,960] INFO: Epoch 140: Train Loss 0.0007
+[2025-10-25 00:32:06,923] INFO: Epoch 150: Train Loss 0.0006
+[2025-10-25 00:32:13,873] INFO: Epoch 160: Train Loss 0.0006
+[2025-10-25 00:32:20,839] INFO: Epoch 170: Train Loss 0.0006
+[2025-10-25 00:32:27,802] INFO: Epoch 180: Train Loss 0.0005
+[2025-10-25 00:32:34,760] INFO: Epoch 190: Train Loss 0.0005
+[2025-10-25 00:32:41,721] INFO: Epoch 200: Train Loss 0.0004
+[2025-10-25 00:32:48,686] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 00:32:55,649] INFO: Epoch 220: Train Loss 0.0004
+[2025-10-25 00:33:02,612] INFO: Epoch 230: Train Loss 0.0004
+[2025-10-25 00:33:09,576] INFO: Epoch 240: Train Loss 0.0003
+[2025-10-25 00:33:16,541] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 00:33:23,502] INFO: Epoch 260: Train Loss 0.0003
+[2025-10-25 00:33:30,468] INFO: Epoch 270: Train Loss 0.0003
+[2025-10-25 00:33:37,433] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 00:33:44,389] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 00:33:51,348] INFO: Epoch 300: Train Loss 0.0002
+[2025-10-25 00:33:58,312] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 00:34:05,277] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 00:34:12,240] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 00:34:19,206] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 00:34:26,169] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 00:34:33,132] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 00:34:40,098] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 00:34:47,065] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 00:34:54,026] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 00:35:00,991] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 00:35:01,019] INFO: ✅ Saved artifacts for SENSEX fold 4 to models/SENSEX/fold_4
+[2025-10-25 00:35:01,019] INFO:    - Features: 13
+[2025-10-25 00:35:01,019] INFO:    - Sequence length: 60
+[2025-10-25 00:35:01,019] INFO:    - Model parameters: 804,097
+[2025-10-25 00:35:01,019] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_4
+[2025-10-25 00:35:01,019] INFO: Completed SENSEX fold 4: Train samples 3834, Final train loss 0.0002
+[2025-10-25 00:35:01,019] INFO: Training SENSEX fold 5
+[2025-10-25 00:35:01,019] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:35:01,039] INFO: Calculating technical indicators...
+[2025-10-25 00:35:01,039] INFO: Calculating technical indicators...
+[2025-10-25 00:35:01,043] INFO: Technical indicators calculated successfully
+[2025-10-25 00:35:01,044] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:35:01,053] INFO: Created 4186 sequences of length 60
+[2025-10-25 00:35:01,053] INFO: Feature shape: (4186, 60, 13), Target shape: (4186,)
+[2025-10-25 00:35:01,077] INFO: Scalers fitted on training data
+[2025-10-25 00:35:01,077] INFO: Feature scaler mean: [20805.21256398 20929.1907754  20640.28153673]...
+[2025-10-25 00:35:01,077] INFO: Target scaler mean: 21031.09, std: 9851.69
+[2025-10-25 00:35:01,089] INFO: Created 1151 sequences of length 60
+[2025-10-25 00:35:01,089] INFO: Feature shape: (1151, 60, 13), Target shape: (1151,)
+[2025-10-25 00:35:01,093] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:35:01,093] INFO: Training samples: 4186
+[2025-10-25 00:35:01,095] INFO: Dataset initialized: 4186 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:35:01,095] INFO: Training DataLoader: 4186 samples, 32 batches of size 128
+[2025-10-25 00:35:01,113] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:35:01,113] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:35:01,116] INFO: Starting training for 400 epochs
+[2025-10-25 00:35:08,706] INFO: Epoch 10: Train Loss 0.0018
+[2025-10-25 00:35:16,304] INFO: Epoch 20: Train Loss 0.0014
+[2025-10-25 00:35:23,904] INFO: Epoch 30: Train Loss 0.0011
+[2025-10-25 00:35:31,506] INFO: Epoch 40: Train Loss 0.0011
+[2025-10-25 00:35:39,099] INFO: Epoch 50: Train Loss 0.0009
+[2025-10-25 00:35:46,699] INFO: Epoch 60: Train Loss 0.0009
+[2025-10-25 00:35:54,278] INFO: Epoch 70: Train Loss 0.0009
+[2025-10-25 00:36:01,869] INFO: Epoch 80: Train Loss 0.0009
+[2025-10-25 00:36:09,472] INFO: Epoch 90: Train Loss 0.0010
+[2025-10-25 00:36:17,076] INFO: Epoch 100: Train Loss 0.0009
+[2025-10-25 00:36:24,678] INFO: Epoch 110: Train Loss 0.0007
+[2025-10-25 00:36:32,282] INFO: Epoch 120: Train Loss 0.0008
+[2025-10-25 00:36:39,861] INFO: Epoch 130: Train Loss 0.0007
+[2025-10-25 00:36:47,448] INFO: Epoch 140: Train Loss 0.0007
+[2025-10-25 00:36:55,028] INFO: Epoch 150: Train Loss 0.0006
+[2025-10-25 00:37:02,622] INFO: Epoch 160: Train Loss 0.0006
+[2025-10-25 00:37:10,192] INFO: Epoch 170: Train Loss 0.0005
+[2025-10-25 00:37:17,806] INFO: Epoch 180: Train Loss 0.0005
+[2025-10-25 00:37:25,391] INFO: Epoch 190: Train Loss 0.0004
+[2025-10-25 00:37:33,006] INFO: Epoch 200: Train Loss 0.0004
+[2025-10-25 00:37:40,599] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 00:37:48,191] INFO: Epoch 220: Train Loss 0.0004
+[2025-10-25 00:37:55,776] INFO: Epoch 230: Train Loss 0.0003
+[2025-10-25 00:38:03,369] INFO: Epoch 240: Train Loss 0.0003
+[2025-10-25 00:38:10,973] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 00:38:18,554] INFO: Epoch 260: Train Loss 0.0003
+[2025-10-25 00:38:26,164] INFO: Epoch 270: Train Loss 0.0002
+[2025-10-25 00:38:33,755] INFO: Epoch 280: Train Loss 0.0002
+[2025-10-25 00:38:41,368] INFO: Epoch 290: Train Loss 0.0002
+[2025-10-25 00:38:48,982] INFO: Epoch 300: Train Loss 0.0002
+[2025-10-25 00:38:56,595] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 00:39:04,191] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 00:39:11,761] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 00:39:20,074] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 00:39:27,624] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 00:39:35,134] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 00:39:42,611] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 00:39:50,126] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 00:39:57,629] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 00:40:05,299] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 00:40:05,322] INFO: ✅ Saved artifacts for SENSEX fold 5 to models/SENSEX/fold_5
+[2025-10-25 00:40:05,322] INFO:    - Features: 13
+[2025-10-25 00:40:05,323] INFO:    - Sequence length: 60
+[2025-10-25 00:40:05,323] INFO:    - Model parameters: 804,097
+[2025-10-25 00:40:05,323] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_5
+[2025-10-25 00:40:05,323] INFO: Completed SENSEX fold 5: Train samples 4186, Final train loss 0.0002
+[2025-10-25 00:40:05,323] INFO: Training SENSEX fold 6
+[2025-10-25 00:40:05,323] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:40:05,347] INFO: Calculating technical indicators...
+[2025-10-25 00:40:05,347] INFO: Calculating technical indicators...
+[2025-10-25 00:40:05,351] INFO: Technical indicators calculated successfully
+[2025-10-25 00:40:05,352] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:40:05,363] INFO: Created 4538 sequences of length 60
+[2025-10-25 00:40:05,363] INFO: Feature shape: (4538, 60, 13), Target shape: (4538,)
+[2025-10-25 00:40:05,385] INFO: Scalers fitted on training data
+[2025-10-25 00:40:05,385] INFO: Feature scaler mean: [23220.00832518 23353.86013924 23037.84009682]...
+[2025-10-25 00:40:05,385] INFO: Target scaler mean: 23544.24, std: 12910.87
+[2025-10-25 00:40:05,399] INFO: Created 802 sequences of length 60
+[2025-10-25 00:40:05,399] INFO: Feature shape: (802, 60, 13), Target shape: (802,)
+[2025-10-25 00:40:05,401] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:40:05,401] INFO: Training samples: 4538
+[2025-10-25 00:40:05,403] INFO: Dataset initialized: 4538 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:40:05,403] INFO: Training DataLoader: 4538 samples, 35 batches of size 128
+[2025-10-25 00:40:05,422] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:40:05,422] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:40:05,425] INFO: Starting training for 400 epochs
+[2025-10-25 00:40:13,693] INFO: Epoch 10: Train Loss 0.0014
+[2025-10-25 00:40:21,957] INFO: Epoch 20: Train Loss 0.0012
+[2025-10-25 00:40:30,246] INFO: Epoch 30: Train Loss 0.0009
+[2025-10-25 00:40:38,496] INFO: Epoch 40: Train Loss 0.0009
+[2025-10-25 00:40:46,767] INFO: Epoch 50: Train Loss 0.0009
+[2025-10-25 00:40:55,046] INFO: Epoch 60: Train Loss 0.0008
+[2025-10-25 00:41:03,331] INFO: Epoch 70: Train Loss 0.0008
+[2025-10-25 00:41:11,620] INFO: Epoch 80: Train Loss 0.0007
+[2025-10-25 00:41:20,117] INFO: Epoch 90: Train Loss 0.0007
+[2025-10-25 00:41:28,505] INFO: Epoch 100: Train Loss 0.0008
+[2025-10-25 00:41:36,830] INFO: Epoch 110: Train Loss 0.0006
+[2025-10-25 00:41:45,262] INFO: Epoch 120: Train Loss 0.0006
+[2025-10-25 00:41:53,507] INFO: Epoch 130: Train Loss 0.0006
+[2025-10-25 00:42:01,763] INFO: Epoch 140: Train Loss 0.0005
+[2025-10-25 00:42:10,024] INFO: Epoch 150: Train Loss 0.0005
+[2025-10-25 00:42:18,281] INFO: Epoch 160: Train Loss 0.0005
+[2025-10-25 00:42:26,501] INFO: Epoch 170: Train Loss 0.0004
+[2025-10-25 00:42:34,770] INFO: Epoch 180: Train Loss 0.0004
+[2025-10-25 00:42:43,048] INFO: Epoch 190: Train Loss 0.0004
+[2025-10-25 00:42:51,513] INFO: Epoch 200: Train Loss 0.0004
+[2025-10-25 00:42:59,813] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 00:43:08,048] INFO: Epoch 220: Train Loss 0.0003
+[2025-10-25 00:43:16,346] INFO: Epoch 230: Train Loss 0.0003
+[2025-10-25 00:43:24,877] INFO: Epoch 240: Train Loss 0.0003
+[2025-10-25 00:43:33,540] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 00:43:42,019] INFO: Epoch 260: Train Loss 0.0003
+[2025-10-25 00:43:50,434] INFO: Epoch 270: Train Loss 0.0002
+[2025-10-25 00:43:58,753] INFO: Epoch 280: Train Loss 0.0002
+[2025-10-25 00:44:07,075] INFO: Epoch 290: Train Loss 0.0002
+[2025-10-25 00:44:15,326] INFO: Epoch 300: Train Loss 0.0002
+[2025-10-25 00:44:23,558] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 00:44:31,907] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 00:44:40,292] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 00:44:48,754] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 00:44:57,010] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 00:45:05,278] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 00:45:13,733] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 00:45:22,233] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 00:45:30,562] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 00:45:39,045] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 00:45:39,074] INFO: ✅ Saved artifacts for SENSEX fold 6 to models/SENSEX/fold_6
+[2025-10-25 00:45:39,074] INFO:    - Features: 13
+[2025-10-25 00:45:39,074] INFO:    - Sequence length: 60
+[2025-10-25 00:45:39,074] INFO:    - Model parameters: 804,097
+[2025-10-25 00:45:39,074] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_6
+[2025-10-25 00:45:39,074] INFO: Completed SENSEX fold 6: Train samples 4538, Final train loss 0.0002
+[2025-10-25 00:45:39,074] INFO: Training SENSEX fold 7
+[2025-10-25 00:45:39,074] INFO: Loading data from data/processed/sensex_clean.csv
+[2025-10-25 00:45:39,096] INFO: Calculating technical indicators...
+[2025-10-25 00:45:39,096] INFO: Calculating technical indicators...
+[2025-10-25 00:45:39,099] INFO: Technical indicators calculated successfully
+[2025-10-25 00:45:39,100] INFO: Available features for SENSEX: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_gold_20d']
+[2025-10-25 00:45:39,112] INFO: Created 4890 sequences of length 60
+[2025-10-25 00:45:39,112] INFO: Feature shape: (4890, 60, 13), Target shape: (4890,)
+[2025-10-25 00:45:39,138] INFO: Scalers fitted on training data
+[2025-10-25 00:45:39,138] INFO: Feature scaler mean: [25803.67137741 25949.52477043 25611.12103095]...
+[2025-10-25 00:45:39,138] INFO: Target scaler mean: 26156.22, std: 15606.74
+[2025-10-25 00:45:39,154] INFO: Created 449 sequences of length 60
+[2025-10-25 00:45:39,154] INFO: Feature shape: (449, 60, 13), Target shape: (449,)
+[2025-10-25 00:45:39,155] INFO: Sequence building completed for SENSEX
+[2025-10-25 00:45:39,155] INFO: Training samples: 4890
+[2025-10-25 00:45:39,157] INFO: Dataset initialized: 4890 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:45:39,157] INFO: Training DataLoader: 4890 samples, 38 batches of size 128
+[2025-10-25 00:45:39,175] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:45:39,175] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:45:39,178] INFO: Starting training for 400 epochs
+[2025-10-25 00:45:48,126] INFO: Epoch 10: Train Loss 0.0013
+[2025-10-25 00:45:57,265] INFO: Epoch 20: Train Loss 0.0011
+[2025-10-25 00:46:06,211] INFO: Epoch 30: Train Loss 0.0008
+[2025-10-25 00:46:15,283] INFO: Epoch 40: Train Loss 0.0008
+[2025-10-25 00:46:24,249] INFO: Epoch 50: Train Loss 0.0007
+[2025-10-25 00:46:33,146] INFO: Epoch 60: Train Loss 0.0006
+[2025-10-25 00:46:42,139] INFO: Epoch 70: Train Loss 0.0007
+[2025-10-25 00:46:51,308] INFO: Epoch 80: Train Loss 0.0006
+[2025-10-25 00:47:00,231] INFO: Epoch 90: Train Loss 0.0006
+[2025-10-25 00:47:09,084] INFO: Epoch 100: Train Loss 0.0005
+[2025-10-25 00:47:18,188] INFO: Epoch 110: Train Loss 0.0005
+[2025-10-25 00:47:27,536] INFO: Epoch 120: Train Loss 0.0005
+[2025-10-25 00:47:37,239] INFO: Epoch 130: Train Loss 0.0004
+[2025-10-25 00:47:46,558] INFO: Epoch 140: Train Loss 0.0004
+[2025-10-25 00:47:56,002] INFO: Epoch 150: Train Loss 0.0004
+[2025-10-25 00:48:05,440] INFO: Epoch 160: Train Loss 0.0004
+[2025-10-25 00:48:14,936] INFO: Epoch 170: Train Loss 0.0003
+[2025-10-25 00:48:24,053] INFO: Epoch 180: Train Loss 0.0004
+[2025-10-25 00:48:33,713] INFO: Epoch 190: Train Loss 0.0003
+[2025-10-25 00:48:42,819] INFO: Epoch 200: Train Loss 0.0003
+[2025-10-25 00:48:51,950] INFO: Epoch 210: Train Loss 0.0003
+[2025-10-25 00:49:01,023] INFO: Epoch 220: Train Loss 0.0003
+[2025-10-25 00:49:10,109] INFO: Epoch 230: Train Loss 0.0002
+[2025-10-25 00:49:19,638] INFO: Epoch 240: Train Loss 0.0002
+[2025-10-25 00:49:28,750] INFO: Epoch 250: Train Loss 0.0002
+[2025-10-25 00:49:37,811] INFO: Epoch 260: Train Loss 0.0002
+[2025-10-25 00:49:46,813] INFO: Epoch 270: Train Loss 0.0002
+[2025-10-25 00:49:55,866] INFO: Epoch 280: Train Loss 0.0002
+[2025-10-25 00:50:04,901] INFO: Epoch 290: Train Loss 0.0002
+[2025-10-25 00:50:13,972] INFO: Epoch 300: Train Loss 0.0002
+[2025-10-25 00:50:23,005] INFO: Epoch 310: Train Loss 0.0001
+[2025-10-25 00:50:32,478] INFO: Epoch 320: Train Loss 0.0001
+[2025-10-25 00:50:41,858] INFO: Epoch 330: Train Loss 0.0001
+[2025-10-25 00:50:51,158] INFO: Epoch 340: Train Loss 0.0001
+[2025-10-25 00:51:00,208] INFO: Epoch 350: Train Loss 0.0001
+[2025-10-25 00:51:09,931] INFO: Epoch 360: Train Loss 0.0001
+[2025-10-25 00:51:19,167] INFO: Epoch 370: Train Loss 0.0001
+[2025-10-25 00:51:28,223] INFO: Epoch 380: Train Loss 0.0001
+[2025-10-25 00:51:37,344] INFO: Epoch 390: Train Loss 0.0001
+[2025-10-25 00:51:46,456] INFO: Epoch 400: Train Loss 0.0001
+[2025-10-25 00:51:46,483] INFO: ✅ Saved artifacts for SENSEX fold 7 to models/SENSEX/fold_7
+[2025-10-25 00:51:46,483] INFO:    - Features: 13
+[2025-10-25 00:51:46,483] INFO:    - Sequence length: 60
+[2025-10-25 00:51:46,483] INFO:    - Model parameters: 804,097
+[2025-10-25 00:51:46,483] INFO: ✅ Saved versioned artifacts to models/SENSEX/fold_7
+[2025-10-25 00:51:46,483] INFO: Completed SENSEX fold 7: Train samples 4890, Final train loss 0.0001
+[2025-10-25 00:51:46,483] INFO: SENSEX summary: Avg train loss 0.0002, Avg val loss nan
+[2025-10-25 00:51:46,484] INFO: 
+=== Training GOLD models ===
+[2025-10-25 00:51:46,484] INFO: Training GOLD fold 0
+[2025-10-25 00:51:46,484] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 00:51:46,504] INFO: Calculating technical indicators...
+[2025-10-25 00:51:46,504] INFO: Calculating technical indicators...
+[2025-10-25 00:51:46,508] INFO: Technical indicators calculated successfully
+[2025-10-25 00:51:46,508] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 00:51:46,518] INFO: Created 2318 sequences of length 60
+[2025-10-25 00:51:46,518] INFO: Feature shape: (2318, 60, 13), Target shape: (2318,)
+[2025-10-25 00:51:46,531] INFO: Scalers fitted on training data
+[2025-10-25 00:51:46,531] INFO: Feature scaler mean: [1013.89488335 1022.45891816 1004.58627231]...
+[2025-10-25 00:51:46,531] INFO: Target scaler mean: 1026.49, std: 435.57
+[2025-10-25 00:51:46,543] INFO: Created 2922 sequences of length 60
+[2025-10-25 00:51:46,543] INFO: Feature shape: (2922, 60, 13), Target shape: (2922,)
+[2025-10-25 00:51:46,552] INFO: Sequence building completed for GOLD
+[2025-10-25 00:51:46,552] INFO: Training samples: 2318
+[2025-10-25 00:51:46,554] INFO: Dataset initialized: 2318 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:51:46,555] INFO: Training DataLoader: 2318 samples, 18 batches of size 128
+[2025-10-25 00:51:46,572] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:51:46,573] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:51:46,579] INFO: Starting training for 400 epochs
+[2025-10-25 00:51:50,917] INFO: Epoch 10: Train Loss 0.0017
+[2025-10-25 00:51:55,271] INFO: Epoch 20: Train Loss 0.0018
+[2025-10-25 00:51:59,633] INFO: Epoch 30: Train Loss 0.0014
+[2025-10-25 00:52:03,988] INFO: Epoch 40: Train Loss 0.0012
+[2025-10-25 00:52:08,335] INFO: Epoch 50: Train Loss 0.0011
+[2025-10-25 00:52:12,659] INFO: Epoch 60: Train Loss 0.0012
+[2025-10-25 00:52:17,006] INFO: Epoch 70: Train Loss 0.0010
+[2025-10-25 00:52:21,361] INFO: Epoch 80: Train Loss 0.0010
+[2025-10-25 00:52:25,690] INFO: Epoch 90: Train Loss 0.0010
+[2025-10-25 00:52:30,030] INFO: Epoch 100: Train Loss 0.0009
+[2025-10-25 00:52:34,399] INFO: Epoch 110: Train Loss 0.0009
+[2025-10-25 00:52:38,713] INFO: Epoch 120: Train Loss 0.0008
+[2025-10-25 00:52:43,281] INFO: Epoch 130: Train Loss 0.0009
+[2025-10-25 00:52:47,598] INFO: Epoch 140: Train Loss 0.0008
+[2025-10-25 00:52:51,903] INFO: Epoch 150: Train Loss 0.0007
+[2025-10-25 00:52:56,212] INFO: Epoch 160: Train Loss 0.0007
+[2025-10-25 00:53:00,523] INFO: Epoch 170: Train Loss 0.0007
+[2025-10-25 00:53:04,849] INFO: Epoch 180: Train Loss 0.0006
+[2025-10-25 00:53:09,186] INFO: Epoch 190: Train Loss 0.0006
+[2025-10-25 00:53:13,509] INFO: Epoch 200: Train Loss 0.0005
+[2025-10-25 00:53:17,820] INFO: Epoch 210: Train Loss 0.0005
+[2025-10-25 00:53:22,328] INFO: Epoch 220: Train Loss 0.0005
+[2025-10-25 00:53:26,682] INFO: Epoch 230: Train Loss 0.0005
+[2025-10-25 00:53:30,954] INFO: Epoch 240: Train Loss 0.0004
+[2025-10-25 00:53:35,274] INFO: Epoch 250: Train Loss 0.0004
+[2025-10-25 00:53:39,583] INFO: Epoch 260: Train Loss 0.0004
+[2025-10-25 00:53:44,255] INFO: Epoch 270: Train Loss 0.0003
+[2025-10-25 00:53:48,578] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 00:53:52,902] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 00:53:57,211] INFO: Epoch 300: Train Loss 0.0003
+[2025-10-25 00:54:01,532] INFO: Epoch 310: Train Loss 0.0003
+[2025-10-25 00:54:05,858] INFO: Epoch 320: Train Loss 0.0003
+[2025-10-25 00:54:10,189] INFO: Epoch 330: Train Loss 0.0003
+[2025-10-25 00:54:14,512] INFO: Epoch 340: Train Loss 0.0003
+[2025-10-25 00:54:18,805] INFO: Epoch 350: Train Loss 0.0003
+[2025-10-25 00:54:23,073] INFO: Epoch 360: Train Loss 0.0003
+[2025-10-25 00:54:27,357] INFO: Epoch 370: Train Loss 0.0003
+[2025-10-25 00:54:31,704] INFO: Epoch 380: Train Loss 0.0003
+[2025-10-25 00:54:36,002] INFO: Epoch 390: Train Loss 0.0003
+[2025-10-25 00:54:40,277] INFO: Epoch 400: Train Loss 0.0003
+[2025-10-25 00:54:40,303] INFO: ✅ Saved artifacts for GOLD fold 0 to models/GOLD/fold_0
+[2025-10-25 00:54:40,304] INFO:    - Features: 13
+[2025-10-25 00:54:40,304] INFO:    - Sequence length: 60
+[2025-10-25 00:54:40,304] INFO:    - Model parameters: 804,097
+[2025-10-25 00:54:40,304] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_0
+[2025-10-25 00:54:40,304] INFO: Completed GOLD fold 0: Train samples 2318, Final train loss 0.0003
+[2025-10-25 00:54:40,304] INFO: Training GOLD fold 1
+[2025-10-25 00:54:40,304] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 00:54:40,323] INFO: Calculating technical indicators...
+[2025-10-25 00:54:40,324] INFO: Calculating technical indicators...
+[2025-10-25 00:54:40,328] INFO: Technical indicators calculated successfully
+[2025-10-25 00:54:40,328] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 00:54:40,337] INFO: Created 2680 sequences of length 60
+[2025-10-25 00:54:40,337] INFO: Feature shape: (2680, 60, 13), Target shape: (2680,)
+[2025-10-25 00:54:40,352] INFO: Scalers fitted on training data
+[2025-10-25 00:54:40,352] INFO: Feature scaler mean: [1049.09304943 1057.68794549 1039.7314813 ]...
+[2025-10-25 00:54:40,352] INFO: Target scaler mean: 1058.59, std: 413.54
+[2025-10-25 00:54:40,365] INFO: Created 2560 sequences of length 60
+[2025-10-25 00:54:40,365] INFO: Feature shape: (2560, 60, 13), Target shape: (2560,)
+[2025-10-25 00:54:40,373] INFO: Sequence building completed for GOLD
+[2025-10-25 00:54:40,373] INFO: Training samples: 2680
+[2025-10-25 00:54:40,375] INFO: Dataset initialized: 2680 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:54:40,375] INFO: Training DataLoader: 2680 samples, 20 batches of size 128
+[2025-10-25 00:54:40,394] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:54:40,394] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:54:40,397] INFO: Starting training for 400 epochs
+[2025-10-25 00:54:45,153] INFO: Epoch 10: Train Loss 0.0019
+[2025-10-25 00:54:49,859] INFO: Epoch 20: Train Loss 0.0017
+[2025-10-25 00:54:54,579] INFO: Epoch 30: Train Loss 0.0016
+[2025-10-25 00:54:59,303] INFO: Epoch 40: Train Loss 0.0013
+[2025-10-25 00:55:04,093] INFO: Epoch 50: Train Loss 0.0013
+[2025-10-25 00:55:08,899] INFO: Epoch 60: Train Loss 0.0012
+[2025-10-25 00:55:13,634] INFO: Epoch 70: Train Loss 0.0012
+[2025-10-25 00:55:18,337] INFO: Epoch 80: Train Loss 0.0011
+[2025-10-25 00:55:23,038] INFO: Epoch 90: Train Loss 0.0010
+[2025-10-25 00:55:27,730] INFO: Epoch 100: Train Loss 0.0011
+[2025-10-25 00:55:32,484] INFO: Epoch 110: Train Loss 0.0010
+[2025-10-25 00:55:37,275] INFO: Epoch 120: Train Loss 0.0009
+[2025-10-25 00:55:41,993] INFO: Epoch 130: Train Loss 0.0009
+[2025-10-25 00:55:46,715] INFO: Epoch 140: Train Loss 0.0008
+[2025-10-25 00:55:51,453] INFO: Epoch 150: Train Loss 0.0008
+[2025-10-25 00:55:56,291] INFO: Epoch 160: Train Loss 0.0007
+[2025-10-25 00:56:01,043] INFO: Epoch 170: Train Loss 0.0007
+[2025-10-25 00:56:05,762] INFO: Epoch 180: Train Loss 0.0006
+[2025-10-25 00:56:10,538] INFO: Epoch 190: Train Loss 0.0006
+[2025-10-25 00:56:15,290] INFO: Epoch 200: Train Loss 0.0005
+[2025-10-25 00:56:19,998] INFO: Epoch 210: Train Loss 0.0005
+[2025-10-25 00:56:24,749] INFO: Epoch 220: Train Loss 0.0006
+[2025-10-25 00:56:29,565] INFO: Epoch 230: Train Loss 0.0004
+[2025-10-25 00:56:34,338] INFO: Epoch 240: Train Loss 0.0004
+[2025-10-25 00:56:39,086] INFO: Epoch 250: Train Loss 0.0004
+[2025-10-25 00:56:43,827] INFO: Epoch 260: Train Loss 0.0004
+[2025-10-25 00:56:48,574] INFO: Epoch 270: Train Loss 0.0004
+[2025-10-25 00:56:53,292] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 00:56:57,987] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 00:57:02,723] INFO: Epoch 300: Train Loss 0.0003
+[2025-10-25 00:57:07,428] INFO: Epoch 310: Train Loss 0.0003
+[2025-10-25 00:57:12,147] INFO: Epoch 320: Train Loss 0.0003
+[2025-10-25 00:57:16,926] INFO: Epoch 330: Train Loss 0.0003
+[2025-10-25 00:57:21,690] INFO: Epoch 340: Train Loss 0.0003
+[2025-10-25 00:57:26,586] INFO: Epoch 350: Train Loss 0.0003
+[2025-10-25 00:57:31,467] INFO: Epoch 360: Train Loss 0.0003
+[2025-10-25 00:57:36,233] INFO: Epoch 370: Train Loss 0.0003
+[2025-10-25 00:57:40,966] INFO: Epoch 380: Train Loss 0.0003
+[2025-10-25 00:57:45,659] INFO: Epoch 390: Train Loss 0.0003
+[2025-10-25 00:57:50,359] INFO: Epoch 400: Train Loss 0.0003
+[2025-10-25 00:57:50,383] INFO: ✅ Saved artifacts for GOLD fold 1 to models/GOLD/fold_1
+[2025-10-25 00:57:50,384] INFO:    - Features: 13
+[2025-10-25 00:57:50,384] INFO:    - Sequence length: 60
+[2025-10-25 00:57:50,384] INFO:    - Model parameters: 804,097
+[2025-10-25 00:57:50,384] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_1
+[2025-10-25 00:57:50,384] INFO: Completed GOLD fold 1: Train samples 2680, Final train loss 0.0003
+[2025-10-25 00:57:50,385] INFO: Training GOLD fold 2
+[2025-10-25 00:57:50,385] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 00:57:50,408] INFO: Calculating technical indicators...
+[2025-10-25 00:57:50,408] INFO: Calculating technical indicators...
+[2025-10-25 00:57:50,412] INFO: Technical indicators calculated successfully
+[2025-10-25 00:57:50,413] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 00:57:50,422] INFO: Created 3048 sequences of length 60
+[2025-10-25 00:57:50,422] INFO: Feature shape: (3048, 60, 13), Target shape: (3048,)
+[2025-10-25 00:57:50,442] INFO: Scalers fitted on training data
+[2025-10-25 00:57:50,443] INFO: Feature scaler mean: [1064.46290727 1073.06113639 1055.21875171]...
+[2025-10-25 00:57:50,443] INFO: Target scaler mean: 1073.62, std: 390.75
+[2025-10-25 00:57:50,466] INFO: Created 2192 sequences of length 60
+[2025-10-25 00:57:50,466] INFO: Feature shape: (2192, 60, 13), Target shape: (2192,)
+[2025-10-25 00:57:50,475] INFO: Sequence building completed for GOLD
+[2025-10-25 00:57:50,475] INFO: Training samples: 3048
+[2025-10-25 00:57:50,477] INFO: Dataset initialized: 3048 samples, seq_len=60, features=13, device=mps
+[2025-10-25 00:57:50,477] INFO: Training DataLoader: 3048 samples, 23 batches of size 128
+[2025-10-25 00:57:50,498] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 00:57:50,498] INFO: Created basic model with 804097 parameters
+[2025-10-25 00:57:50,504] INFO: Starting training for 400 epochs
+[2025-10-25 00:57:55,983] INFO: Epoch 10: Train Loss 0.0021
+[2025-10-25 00:58:01,450] INFO: Epoch 20: Train Loss 0.0018
+[2025-10-25 00:58:06,898] INFO: Epoch 30: Train Loss 0.0015
+[2025-10-25 00:58:12,336] INFO: Epoch 40: Train Loss 0.0014
+[2025-10-25 00:58:17,772] INFO: Epoch 50: Train Loss 0.0014
+[2025-10-25 00:58:23,240] INFO: Epoch 60: Train Loss 0.0012
+[2025-10-25 00:58:28,670] INFO: Epoch 70: Train Loss 0.0011
+[2025-10-25 00:58:34,126] INFO: Epoch 80: Train Loss 0.0012
+[2025-10-25 00:58:39,586] INFO: Epoch 90: Train Loss 0.0010
+[2025-10-25 00:58:45,020] INFO: Epoch 100: Train Loss 0.0013
+[2025-10-25 00:58:50,459] INFO: Epoch 110: Train Loss 0.0009
+[2025-10-25 00:58:55,894] INFO: Epoch 120: Train Loss 0.0009
+[2025-10-25 00:59:01,320] INFO: Epoch 130: Train Loss 0.0008
+[2025-10-25 00:59:06,805] INFO: Epoch 140: Train Loss 0.0008
+[2025-10-25 00:59:12,237] INFO: Epoch 150: Train Loss 0.0007
+[2025-10-25 00:59:17,713] INFO: Epoch 160: Train Loss 0.0007
+[2025-10-25 00:59:23,195] INFO: Epoch 170: Train Loss 0.0006
+[2025-10-25 00:59:28,652] INFO: Epoch 180: Train Loss 0.0006
+[2025-10-25 00:59:34,120] INFO: Epoch 190: Train Loss 0.0005
+[2025-10-25 00:59:39,558] INFO: Epoch 200: Train Loss 0.0005
+[2025-10-25 00:59:45,012] INFO: Epoch 210: Train Loss 0.0005
+[2025-10-25 00:59:50,463] INFO: Epoch 220: Train Loss 0.0004
+[2025-10-25 00:59:55,928] INFO: Epoch 230: Train Loss 0.0004
+[2025-10-25 01:00:01,368] INFO: Epoch 240: Train Loss 0.0004
+[2025-10-25 01:00:06,829] INFO: Epoch 250: Train Loss 0.0004
+[2025-10-25 01:00:12,332] INFO: Epoch 260: Train Loss 0.0004
+[2025-10-25 01:00:17,810] INFO: Epoch 270: Train Loss 0.0003
+[2025-10-25 01:00:23,301] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 01:00:28,811] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 01:00:34,301] INFO: Epoch 300: Train Loss 0.0003
+[2025-10-25 01:00:39,792] INFO: Epoch 310: Train Loss 0.0003
+[2025-10-25 01:00:45,272] INFO: Epoch 320: Train Loss 0.0003
+[2025-10-25 01:00:50,739] INFO: Epoch 330: Train Loss 0.0003
+[2025-10-25 01:00:56,198] INFO: Epoch 340: Train Loss 0.0003
+[2025-10-25 01:01:01,633] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 01:01:07,103] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 01:01:12,541] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 01:01:18,001] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 01:01:23,447] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 01:01:28,901] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 01:01:28,926] INFO: ✅ Saved artifacts for GOLD fold 2 to models/GOLD/fold_2
+[2025-10-25 01:01:28,926] INFO:    - Features: 13
+[2025-10-25 01:01:28,926] INFO:    - Sequence length: 60
+[2025-10-25 01:01:28,926] INFO:    - Model parameters: 804,097
+[2025-10-25 01:01:28,926] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_2
+[2025-10-25 01:01:28,926] INFO: Completed GOLD fold 2: Train samples 3048, Final train loss 0.0002
+[2025-10-25 01:01:28,927] INFO: Training GOLD fold 3
+[2025-10-25 01:01:28,927] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 01:01:28,946] INFO: Calculating technical indicators...
+[2025-10-25 01:01:28,947] INFO: Calculating technical indicators...
+[2025-10-25 01:01:28,950] INFO: Technical indicators calculated successfully
+[2025-10-25 01:01:28,951] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 01:01:28,959] INFO: Created 3413 sequences of length 60
+[2025-10-25 01:01:28,959] INFO: Feature shape: (3413, 60, 13), Target shape: (3413,)
+[2025-10-25 01:01:28,982] INFO: Scalers fitted on training data
+[2025-10-25 01:01:28,982] INFO: Feature scaler mean: [1085.73597003 1094.17146332 1076.71918165]...
+[2025-10-25 01:01:28,982] INFO: Target scaler mean: 1093.56, std: 374.07
+[2025-10-25 01:01:28,998] INFO: Created 1827 sequences of length 60
+[2025-10-25 01:01:28,998] INFO: Feature shape: (1827, 60, 13), Target shape: (1827,)
+[2025-10-25 01:01:29,005] INFO: Sequence building completed for GOLD
+[2025-10-25 01:01:29,005] INFO: Training samples: 3413
+[2025-10-25 01:01:29,006] INFO: Dataset initialized: 3413 samples, seq_len=60, features=13, device=mps
+[2025-10-25 01:01:29,006] INFO: Training DataLoader: 3413 samples, 26 batches of size 128
+[2025-10-25 01:01:29,025] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 01:01:29,025] INFO: Created basic model with 804097 parameters
+[2025-10-25 01:01:29,030] INFO: Starting training for 400 epochs
+[2025-10-25 01:01:35,186] INFO: Epoch 10: Train Loss 0.0020
+[2025-10-25 01:01:41,285] INFO: Epoch 20: Train Loss 0.0019
+[2025-10-25 01:01:47,369] INFO: Epoch 30: Train Loss 0.0017
+[2025-10-25 01:01:53,463] INFO: Epoch 40: Train Loss 0.0015
+[2025-10-25 01:01:59,608] INFO: Epoch 50: Train Loss 0.0014
+[2025-10-25 01:02:05,739] INFO: Epoch 60: Train Loss 0.0014
+[2025-10-25 01:02:11,898] INFO: Epoch 70: Train Loss 0.0013
+[2025-10-25 01:02:17,962] INFO: Epoch 80: Train Loss 0.0012
+[2025-10-25 01:02:24,085] INFO: Epoch 90: Train Loss 0.0012
+[2025-10-25 01:02:30,173] INFO: Epoch 100: Train Loss 0.0010
+[2025-10-25 01:02:36,235] INFO: Epoch 110: Train Loss 0.0010
+[2025-10-25 01:02:42,325] INFO: Epoch 120: Train Loss 0.0009
+[2025-10-25 01:02:48,436] INFO: Epoch 130: Train Loss 0.0009
+[2025-10-25 01:02:54,531] INFO: Epoch 140: Train Loss 0.0008
+[2025-10-25 01:03:00,668] INFO: Epoch 150: Train Loss 0.0007
+[2025-10-25 01:03:06,833] INFO: Epoch 160: Train Loss 0.0007
+[2025-10-25 01:03:12,948] INFO: Epoch 170: Train Loss 0.0006
+[2025-10-25 01:03:19,078] INFO: Epoch 180: Train Loss 0.0006
+[2025-10-25 01:03:25,211] INFO: Epoch 190: Train Loss 0.0005
+[2025-10-25 01:03:31,326] INFO: Epoch 200: Train Loss 0.0005
+[2025-10-25 01:03:37,465] INFO: Epoch 210: Train Loss 0.0005
+[2025-10-25 01:03:43,598] INFO: Epoch 220: Train Loss 0.0004
+[2025-10-25 01:03:49,727] INFO: Epoch 230: Train Loss 0.0004
+[2025-10-25 01:03:55,872] INFO: Epoch 240: Train Loss 0.0004
+[2025-10-25 01:04:01,997] INFO: Epoch 250: Train Loss 0.0004
+[2025-10-25 01:04:08,079] INFO: Epoch 260: Train Loss 0.0003
+[2025-10-25 01:04:14,171] INFO: Epoch 270: Train Loss 0.0003
+[2025-10-25 01:04:20,278] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 01:04:26,387] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 01:04:32,522] INFO: Epoch 300: Train Loss 0.0003
+[2025-10-25 01:04:38,636] INFO: Epoch 310: Train Loss 0.0003
+[2025-10-25 01:04:44,771] INFO: Epoch 320: Train Loss 0.0003
+[2025-10-25 01:04:50,933] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 01:04:57,068] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 01:05:03,202] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 01:05:09,322] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 01:05:15,432] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 01:05:21,596] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 01:05:27,751] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 01:05:33,848] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 01:05:33,872] INFO: ✅ Saved artifacts for GOLD fold 3 to models/GOLD/fold_3
+[2025-10-25 01:05:33,872] INFO:    - Features: 13
+[2025-10-25 01:05:33,872] INFO:    - Sequence length: 60
+[2025-10-25 01:05:33,872] INFO:    - Model parameters: 804,097
+[2025-10-25 01:05:33,872] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_3
+[2025-10-25 01:05:33,872] INFO: Completed GOLD fold 3: Train samples 3413, Final train loss 0.0002
+[2025-10-25 01:05:33,873] INFO: Training GOLD fold 4
+[2025-10-25 01:05:33,873] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 01:05:33,891] INFO: Calculating technical indicators...
+[2025-10-25 01:05:33,891] INFO: Calculating technical indicators...
+[2025-10-25 01:05:33,895] INFO: Technical indicators calculated successfully
+[2025-10-25 01:05:33,896] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 01:05:33,906] INFO: Created 3778 sequences of length 60
+[2025-10-25 01:05:33,906] INFO: Feature shape: (3778, 60, 13), Target shape: (3778,)
+[2025-10-25 01:05:33,923] INFO: Scalers fitted on training data
+[2025-10-25 01:05:33,924] INFO: Feature scaler mean: [1104.09583046 1112.29042479 1095.37146477]...
+[2025-10-25 01:05:33,924] INFO: Target scaler mean: 1111.24, std: 359.93
+[2025-10-25 01:05:33,936] INFO: Created 1464 sequences of length 60
+[2025-10-25 01:05:33,936] INFO: Feature shape: (1464, 60, 13), Target shape: (1464,)
+[2025-10-25 01:05:33,940] INFO: Sequence building completed for GOLD
+[2025-10-25 01:05:33,940] INFO: Training samples: 3778
+[2025-10-25 01:05:33,942] INFO: Dataset initialized: 3778 samples, seq_len=60, features=13, device=mps
+[2025-10-25 01:05:33,942] INFO: Training DataLoader: 3778 samples, 29 batches of size 128
+[2025-10-25 01:05:33,959] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 01:05:33,959] INFO: Created basic model with 804097 parameters
+[2025-10-25 01:05:33,963] INFO: Starting training for 400 epochs
+[2025-10-25 01:05:40,836] INFO: Epoch 10: Train Loss 0.0020
+[2025-10-25 01:05:47,724] INFO: Epoch 20: Train Loss 0.0018
+[2025-10-25 01:05:54,603] INFO: Epoch 30: Train Loss 0.0016
+[2025-10-25 01:06:01,500] INFO: Epoch 40: Train Loss 0.0016
+[2025-10-25 01:06:08,378] INFO: Epoch 50: Train Loss 0.0013
+[2025-10-25 01:06:15,282] INFO: Epoch 60: Train Loss 0.0013
+[2025-10-25 01:06:22,177] INFO: Epoch 70: Train Loss 0.0012
+[2025-10-25 01:06:29,064] INFO: Epoch 80: Train Loss 0.0012
+[2025-10-25 01:06:35,946] INFO: Epoch 90: Train Loss 0.0012
+[2025-10-25 01:06:42,863] INFO: Epoch 100: Train Loss 0.0010
+[2025-10-25 01:06:49,787] INFO: Epoch 110: Train Loss 0.0009
+[2025-10-25 01:06:56,672] INFO: Epoch 120: Train Loss 0.0009
+[2025-10-25 01:07:03,616] INFO: Epoch 130: Train Loss 0.0008
+[2025-10-25 01:07:10,467] INFO: Epoch 140: Train Loss 0.0007
+[2025-10-25 01:07:17,268] INFO: Epoch 150: Train Loss 0.0007
+[2025-10-25 01:07:24,114] INFO: Epoch 160: Train Loss 0.0006
+[2025-10-25 01:07:31,009] INFO: Epoch 170: Train Loss 0.0006
+[2025-10-25 01:07:38,192] INFO: Epoch 180: Train Loss 0.0005
+[2025-10-25 01:07:45,093] INFO: Epoch 190: Train Loss 0.0005
+[2025-10-25 01:07:52,040] INFO: Epoch 200: Train Loss 0.0005
+[2025-10-25 01:07:58,975] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 01:08:05,933] INFO: Epoch 220: Train Loss 0.0004
+[2025-10-25 01:08:12,905] INFO: Epoch 230: Train Loss 0.0004
+[2025-10-25 01:08:19,810] INFO: Epoch 240: Train Loss 0.0003
+[2025-10-25 01:08:26,713] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 01:08:33,634] INFO: Epoch 260: Train Loss 0.0003
+[2025-10-25 01:08:40,573] INFO: Epoch 270: Train Loss 0.0003
+[2025-10-25 01:08:47,504] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 01:08:54,436] INFO: Epoch 290: Train Loss 0.0003
+[2025-10-25 01:09:01,403] INFO: Epoch 300: Train Loss 0.0003
+[2025-10-25 01:09:08,344] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 01:09:15,259] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 01:09:22,193] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 01:09:29,131] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 01:09:36,059] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 01:09:42,996] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 01:09:49,938] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 01:09:56,882] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 01:10:03,828] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 01:10:10,753] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 01:10:10,778] INFO: ✅ Saved artifacts for GOLD fold 4 to models/GOLD/fold_4
+[2025-10-25 01:10:10,778] INFO:    - Features: 13
+[2025-10-25 01:10:10,779] INFO:    - Sequence length: 60
+[2025-10-25 01:10:10,779] INFO:    - Model parameters: 804,097
+[2025-10-25 01:10:10,779] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_4
+[2025-10-25 01:10:10,779] INFO: Completed GOLD fold 4: Train samples 3778, Final train loss 0.0002
+[2025-10-25 01:10:10,779] INFO: Training GOLD fold 5
+[2025-10-25 01:10:10,779] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 01:10:10,797] INFO: Calculating technical indicators...
+[2025-10-25 01:10:10,797] INFO: Calculating technical indicators...
+[2025-10-25 01:10:10,801] INFO: Technical indicators calculated successfully
+[2025-10-25 01:10:10,802] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 01:10:10,812] INFO: Created 4145 sequences of length 60
+[2025-10-25 01:10:10,812] INFO: Feature shape: (4145, 60, 13), Target shape: (4145,)
+[2025-10-25 01:10:10,834] INFO: Scalers fitted on training data
+[2025-10-25 01:10:10,834] INFO: Feature scaler mean: [1146.32797728 1154.91191508 1137.34505659]...
+[2025-10-25 01:10:10,834] INFO: Target scaler mean: 1157.54, std: 378.40
+[2025-10-25 01:10:10,847] INFO: Created 1096 sequences of length 60
+[2025-10-25 01:10:10,847] INFO: Feature shape: (1096, 60, 13), Target shape: (1096,)
+[2025-10-25 01:10:10,851] INFO: Sequence building completed for GOLD
+[2025-10-25 01:10:10,851] INFO: Training samples: 4145
+[2025-10-25 01:10:10,853] INFO: Dataset initialized: 4145 samples, seq_len=60, features=13, device=mps
+[2025-10-25 01:10:10,853] INFO: Training DataLoader: 4145 samples, 32 batches of size 128
+[2025-10-25 01:10:10,872] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 01:10:10,872] INFO: Created basic model with 804097 parameters
+[2025-10-25 01:10:10,879] INFO: Starting training for 400 epochs
+[2025-10-25 01:10:18,472] INFO: Epoch 10: Train Loss 0.0022
+[2025-10-25 01:10:26,080] INFO: Epoch 20: Train Loss 0.0018
+[2025-10-25 01:10:33,660] INFO: Epoch 30: Train Loss 0.0016
+[2025-10-25 01:10:41,257] INFO: Epoch 40: Train Loss 0.0014
+[2025-10-25 01:10:48,844] INFO: Epoch 50: Train Loss 0.0014
+[2025-10-25 01:10:56,443] INFO: Epoch 60: Train Loss 0.0014
+[2025-10-25 01:11:04,353] INFO: Epoch 70: Train Loss 0.0013
+[2025-10-25 01:11:12,263] INFO: Epoch 80: Train Loss 0.0012
+[2025-10-25 01:11:19,815] INFO: Epoch 90: Train Loss 0.0011
+[2025-10-25 01:11:27,358] INFO: Epoch 100: Train Loss 0.0011
+[2025-10-25 01:11:34,911] INFO: Epoch 110: Train Loss 0.0010
+[2025-10-25 01:11:42,474] INFO: Epoch 120: Train Loss 0.0008
+[2025-10-25 01:11:50,013] INFO: Epoch 130: Train Loss 0.0008
+[2025-10-25 01:11:57,557] INFO: Epoch 140: Train Loss 0.0008
+[2025-10-25 01:12:05,096] INFO: Epoch 150: Train Loss 0.0007
+[2025-10-25 01:12:12,638] INFO: Epoch 160: Train Loss 0.0006
+[2025-10-25 01:12:20,171] INFO: Epoch 170: Train Loss 0.0005
+[2025-10-25 01:12:27,706] INFO: Epoch 180: Train Loss 0.0005
+[2025-10-25 01:12:35,251] INFO: Epoch 190: Train Loss 0.0004
+[2025-10-25 01:12:42,834] INFO: Epoch 200: Train Loss 0.0004
+[2025-10-25 01:12:50,516] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 01:12:58,053] INFO: Epoch 220: Train Loss 0.0003
+[2025-10-25 01:13:05,580] INFO: Epoch 230: Train Loss 0.0003
+[2025-10-25 01:13:13,116] INFO: Epoch 240: Train Loss 0.0003
+[2025-10-25 01:13:20,649] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 01:13:28,188] INFO: Epoch 260: Train Loss 0.0003
+[2025-10-25 01:13:35,732] INFO: Epoch 270: Train Loss 0.0003
+[2025-10-25 01:13:43,312] INFO: Epoch 280: Train Loss 0.0003
+[2025-10-25 01:13:50,858] INFO: Epoch 290: Train Loss 0.0002
+[2025-10-25 01:13:58,405] INFO: Epoch 300: Train Loss 0.0002
+[2025-10-25 01:14:05,947] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 01:14:13,484] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 01:14:21,034] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 01:14:28,821] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 01:14:36,407] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 01:14:43,997] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 01:14:51,601] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 01:14:59,187] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 01:15:06,928] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 01:15:14,522] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 01:15:14,551] INFO: ✅ Saved artifacts for GOLD fold 5 to models/GOLD/fold_5
+[2025-10-25 01:15:14,551] INFO:    - Features: 13
+[2025-10-25 01:15:14,551] INFO:    - Sequence length: 60
+[2025-10-25 01:15:14,551] INFO:    - Model parameters: 804,097
+[2025-10-25 01:15:14,551] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_5
+[2025-10-25 01:15:14,551] INFO: Completed GOLD fold 5: Train samples 4145, Final train loss 0.0002
+[2025-10-25 01:15:14,552] INFO: Training GOLD fold 6
+[2025-10-25 01:15:14,552] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 01:15:14,574] INFO: Calculating technical indicators...
+[2025-10-25 01:15:14,574] INFO: Calculating technical indicators...
+[2025-10-25 01:15:14,578] INFO: Technical indicators calculated successfully
+[2025-10-25 01:15:14,579] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 01:15:14,591] INFO: Created 4511 sequences of length 60
+[2025-10-25 01:15:14,591] INFO: Feature shape: (4511, 60, 13), Target shape: (4511,)
+[2025-10-25 01:15:14,612] INFO: Scalers fitted on training data
+[2025-10-25 01:15:14,612] INFO: Feature scaler mean: [1201.04241062 1209.86975132 1191.72162507]...
+[2025-10-25 01:15:14,612] INFO: Target scaler mean: 1211.34, std: 405.78
+[2025-10-25 01:15:14,625] INFO: Created 733 sequences of length 60
+[2025-10-25 01:15:14,625] INFO: Feature shape: (733, 60, 13), Target shape: (733,)
+[2025-10-25 01:15:14,628] INFO: Sequence building completed for GOLD
+[2025-10-25 01:15:14,628] INFO: Training samples: 4511
+[2025-10-25 01:15:14,629] INFO: Dataset initialized: 4511 samples, seq_len=60, features=13, device=mps
+[2025-10-25 01:15:14,630] INFO: Training DataLoader: 4511 samples, 35 batches of size 128
+[2025-10-25 01:15:14,647] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 01:15:14,647] INFO: Created basic model with 804097 parameters
+[2025-10-25 01:15:14,654] INFO: Starting training for 400 epochs
+[2025-10-25 01:15:23,029] INFO: Epoch 10: Train Loss 0.0019
+[2025-10-25 01:15:31,395] INFO: Epoch 20: Train Loss 0.0017
+[2025-10-25 01:15:39,759] INFO: Epoch 30: Train Loss 0.0017
+[2025-10-25 01:15:48,135] INFO: Epoch 40: Train Loss 0.0015
+[2025-10-25 01:15:56,508] INFO: Epoch 50: Train Loss 0.0013
+[2025-10-25 01:16:04,904] INFO: Epoch 60: Train Loss 0.0013
+[2025-10-25 01:16:13,290] INFO: Epoch 70: Train Loss 0.0012
+[2025-10-25 01:16:21,665] INFO: Epoch 80: Train Loss 0.0013
+[2025-10-25 01:16:30,053] INFO: Epoch 90: Train Loss 0.0011
+[2025-10-25 01:16:38,388] INFO: Epoch 100: Train Loss 0.0010
+[2025-10-25 01:16:46,780] INFO: Epoch 110: Train Loss 0.0008
+[2025-10-25 01:16:55,182] INFO: Epoch 120: Train Loss 0.0008
+[2025-10-25 01:17:03,716] INFO: Epoch 130: Train Loss 0.0008
+[2025-10-25 01:17:12,334] INFO: Epoch 140: Train Loss 0.0007
+[2025-10-25 01:17:20,948] INFO: Epoch 150: Train Loss 0.0006
+[2025-10-25 01:17:29,440] INFO: Epoch 160: Train Loss 0.0005
+[2025-10-25 01:17:37,806] INFO: Epoch 170: Train Loss 0.0005
+[2025-10-25 01:17:46,382] INFO: Epoch 180: Train Loss 0.0004
+[2025-10-25 01:17:55,138] INFO: Epoch 190: Train Loss 0.0004
+[2025-10-25 01:18:03,884] INFO: Epoch 200: Train Loss 0.0004
+[2025-10-25 01:18:12,209] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 01:18:20,543] INFO: Epoch 220: Train Loss 0.0003
+[2025-10-25 01:18:28,885] INFO: Epoch 230: Train Loss 0.0003
+[2025-10-25 01:18:37,217] INFO: Epoch 240: Train Loss 0.0003
+[2025-10-25 01:18:45,544] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 01:18:53,892] INFO: Epoch 260: Train Loss 0.0002
+[2025-10-25 01:19:02,221] INFO: Epoch 270: Train Loss 0.0002
+[2025-10-25 01:19:10,527] INFO: Epoch 280: Train Loss 0.0002
+[2025-10-25 01:19:18,885] INFO: Epoch 290: Train Loss 0.0002
+[2025-10-25 01:19:27,226] INFO: Epoch 300: Train Loss 0.0002
+[2025-10-25 01:19:35,569] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 01:19:43,903] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 01:19:52,224] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 01:20:00,578] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 01:20:08,926] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 01:20:17,271] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 01:20:25,718] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 01:20:34,085] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 01:20:42,443] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 01:20:50,825] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 01:20:50,853] INFO: ✅ Saved artifacts for GOLD fold 6 to models/GOLD/fold_6
+[2025-10-25 01:20:50,853] INFO:    - Features: 13
+[2025-10-25 01:20:50,853] INFO:    - Sequence length: 60
+[2025-10-25 01:20:50,853] INFO:    - Model parameters: 804,097
+[2025-10-25 01:20:50,853] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_6
+[2025-10-25 01:20:50,853] INFO: Completed GOLD fold 6: Train samples 4511, Final train loss 0.0002
+[2025-10-25 01:20:50,854] INFO: Training GOLD fold 7
+[2025-10-25 01:20:50,854] INFO: Loading data from data/processed/gold_clean.csv
+[2025-10-25 01:20:50,875] INFO: Calculating technical indicators...
+[2025-10-25 01:20:50,875] INFO: Calculating technical indicators...
+[2025-10-25 01:20:50,880] INFO: Technical indicators calculated successfully
+[2025-10-25 01:20:50,880] INFO: Available features for GOLD: ['Close', 'Open', 'High', 'Low', 'Volume', 'ret_1d', 'vol_10d', 'zscore_20d', 'rsi_14', 'ema_10', 'ema_20', 'atr_14', 'corr_sensex_20d']
+[2025-10-25 01:20:50,891] INFO: Created 4877 sequences of length 60
+[2025-10-25 01:20:50,891] INFO: Feature shape: (4877, 60, 13), Target shape: (4877,)
+[2025-10-25 01:20:50,915] INFO: Scalers fitted on training data
+[2025-10-25 01:20:50,915] INFO: Feature scaler mean: [1249.68169891 1258.81769386 1240.10214747]...
+[2025-10-25 01:20:50,915] INFO: Target scaler mean: 1259.30, std: 426.03
+[2025-10-25 01:20:50,932] INFO: Created 366 sequences of length 60
+[2025-10-25 01:20:50,932] INFO: Feature shape: (366, 60, 13), Target shape: (366,)
+[2025-10-25 01:20:50,933] INFO: Sequence building completed for GOLD
+[2025-10-25 01:20:50,933] INFO: Training samples: 4877
+[2025-10-25 01:20:50,935] INFO: Dataset initialized: 4877 samples, seq_len=60, features=13, device=mps
+[2025-10-25 01:20:50,935] INFO: Training DataLoader: 4877 samples, 38 batches of size 128
+[2025-10-25 01:20:50,955] INFO: Initialized LSTM model: input_size=13, hidden_size=256, num_layers=2, dropout=0.2
+[2025-10-25 01:20:50,955] INFO: Created basic model with 804097 parameters
+[2025-10-25 01:20:50,961] INFO: Starting training for 400 epochs
+[2025-10-25 01:21:00,034] INFO: Epoch 10: Train Loss 0.0018
+[2025-10-25 01:21:09,103] INFO: Epoch 20: Train Loss 0.0017
+[2025-10-25 01:21:18,085] INFO: Epoch 30: Train Loss 0.0014
+[2025-10-25 01:21:27,104] INFO: Epoch 40: Train Loss 0.0014
+[2025-10-25 01:21:36,265] INFO: Epoch 50: Train Loss 0.0012
+[2025-10-25 01:21:45,548] INFO: Epoch 60: Train Loss 0.0012
+[2025-10-25 01:21:54,744] INFO: Epoch 70: Train Loss 0.0011
+[2025-10-25 01:22:03,784] INFO: Epoch 80: Train Loss 0.0011
+[2025-10-25 01:22:12,845] INFO: Epoch 90: Train Loss 0.0010
+[2025-10-25 01:22:21,888] INFO: Epoch 100: Train Loss 0.0009
+[2025-10-25 01:22:30,884] INFO: Epoch 110: Train Loss 0.0008
+[2025-10-25 01:22:39,959] INFO: Epoch 120: Train Loss 0.0007
+[2025-10-25 01:22:48,986] INFO: Epoch 130: Train Loss 0.0008
+[2025-10-25 01:22:58,046] INFO: Epoch 140: Train Loss 0.0007
+[2025-10-25 01:23:07,062] INFO: Epoch 150: Train Loss 0.0006
+[2025-10-25 01:23:16,065] INFO: Epoch 160: Train Loss 0.0005
+[2025-10-25 01:23:25,304] INFO: Epoch 170: Train Loss 0.0005
+[2025-10-25 01:23:34,455] INFO: Epoch 180: Train Loss 0.0004
+[2025-10-25 01:23:43,605] INFO: Epoch 190: Train Loss 0.0004
+[2025-10-25 01:23:52,642] INFO: Epoch 200: Train Loss 0.0004
+[2025-10-25 01:24:01,693] INFO: Epoch 210: Train Loss 0.0004
+[2025-10-25 01:24:10,782] INFO: Epoch 220: Train Loss 0.0003
+[2025-10-25 01:24:19,907] INFO: Epoch 230: Train Loss 0.0003
+[2025-10-25 01:24:29,079] INFO: Epoch 240: Train Loss 0.0003
+[2025-10-25 01:24:38,319] INFO: Epoch 250: Train Loss 0.0003
+[2025-10-25 01:24:47,395] INFO: Epoch 260: Train Loss 0.0002
+[2025-10-25 01:24:56,583] INFO: Epoch 270: Train Loss 0.0002
+[2025-10-25 01:25:05,675] INFO: Epoch 280: Train Loss 0.0002
+[2025-10-25 01:25:14,873] INFO: Epoch 290: Train Loss 0.0002
+[2025-10-25 01:25:23,940] INFO: Epoch 300: Train Loss 0.0002
+[2025-10-25 01:25:32,975] INFO: Epoch 310: Train Loss 0.0002
+[2025-10-25 01:25:41,992] INFO: Epoch 320: Train Loss 0.0002
+[2025-10-25 01:25:51,004] INFO: Epoch 330: Train Loss 0.0002
+[2025-10-25 01:26:00,104] INFO: Epoch 340: Train Loss 0.0002
+[2025-10-25 01:26:09,266] INFO: Epoch 350: Train Loss 0.0002
+[2025-10-25 01:26:18,327] INFO: Epoch 360: Train Loss 0.0002
+[2025-10-25 01:26:27,611] INFO: Epoch 370: Train Loss 0.0002
+[2025-10-25 01:26:36,696] INFO: Epoch 380: Train Loss 0.0002
+[2025-10-25 01:26:45,790] INFO: Epoch 390: Train Loss 0.0002
+[2025-10-25 01:26:54,799] INFO: Epoch 400: Train Loss 0.0002
+[2025-10-25 01:26:54,826] INFO: ✅ Saved artifacts for GOLD fold 7 to models/GOLD/fold_7
+[2025-10-25 01:26:54,827] INFO:    - Features: 13
+[2025-10-25 01:26:54,827] INFO:    - Sequence length: 60
+[2025-10-25 01:26:54,827] INFO:    - Model parameters: 804,097
+[2025-10-25 01:26:54,827] INFO: ✅ Saved versioned artifacts to models/GOLD/fold_7
+[2025-10-25 01:26:54,827] INFO: Completed GOLD fold 7: Train samples 4877, Final train loss 0.0002
+[2025-10-25 01:26:54,827] INFO: GOLD summary: Avg train loss 0.0002, Avg val loss nan
+[2025-10-25 01:26:54,829] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-25 01:26:54,829] INFO: ✅ Training pipeline completed successfully
+
+    ╔══════════════════════════════════════════════════════════════════╗
+    ║               SENSEX & GOLD LSTM PRICE PREDICTOR                 ║
+    ║                                                                  ║
+    ║  📈 Advanced LSTM models for financial time series prediction   ║
+    ║  🔮 Next-day price forecasting with temporal cross-validation   ║
+    ║  🍎 Optimized for Apple Silicon (MPS) and CUDA acceleration     ║
+    ║  📊 Real data verification and comprehensive evaluation          ║
+    ║                                                                  ║
+    ║  Assets: BSE SENSEX, Gold (INR)                                 ║
+    ║  Horizon: T+1 (next business day)                               ║
+    ║  Features: Technical indicators + price history                  ║
+    ║                                                                  ║
+    ╚══════════════════════════════════════════════════════════════════╝
+    
+
+=== REAL DATA VERIFICATION STARTING ===
+
+Verifying SENSEX data...
+Found 1 file(s) for SENSEX
+✅ VERIFIED: SENSEX rows=5,478 span=2003-10-01→2025-10-21 gaps<=2 max_flat=1.0
+
+Verifying GOLD data...
+Found 1 file(s) for GOLD
+✅ VERIFIED: GOLD rows=5,383 span=2004-06-11→2025-09-30 gaps<=5 max_flat=3.0
+📁 Hashes saved to logs/data_hashes.json
+
+REAL DATA VERIFIED ✅

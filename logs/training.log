@@ -1,0 +1,223 @@
+[2025-10-23 17:25:13,529] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 17:25:13,529] INFO: Configuration: configs/test.yaml
+[2025-10-23 17:25:13,531] INFO: Random seed set to 42
+[2025-10-23 17:25:13,531] INFO: Using device: mps
+[2025-10-23 17:25:13,531] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 17:25:13,616] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 17:25:13,685] ERROR: Training failed: NaTType does not support strftime
+[2025-10-23 17:26:03,957] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 17:26:03,957] INFO: Configuration: configs/test.yaml
+[2025-10-23 17:26:03,959] INFO: Random seed set to 42
+[2025-10-23 17:26:03,959] INFO: Using device: mps
+[2025-10-23 17:26:03,959] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 17:26:04,048] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 17:26:04,108] ERROR: Training failed: NaTType does not support strftime
+[2025-10-23 17:35:46,630] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 17:35:46,630] INFO: Configuration: configs/test.yaml
+[2025-10-23 17:35:46,631] INFO: Random seed set to 42
+[2025-10-23 17:35:46,632] INFO: Using device: mps
+[2025-10-23 17:35:46,632] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 17:35:46,720] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 17:35:46,754] ERROR: Training failed: NaTType does not support strftime
+[2025-10-23 17:36:52,279] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 17:36:52,279] INFO: Configuration: configs/test.yaml
+[2025-10-23 17:36:52,280] INFO: Random seed set to 42
+[2025-10-23 17:36:52,280] INFO: Using device: mps
+[2025-10-23 17:36:52,280] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 17:36:52,356] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 17:36:52,419] ERROR: Training failed: Missing required columns for GOLD: ['Date', 'Open', 'High', 'Low', 'Close']
+[2025-10-23 17:41:14,337] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 17:41:14,337] INFO: Configuration: configs/default.yaml
+[2025-10-23 17:41:14,339] INFO: Random seed set to 42
+[2025-10-23 17:41:14,339] INFO: Using device: mps
+[2025-10-23 17:41:14,339] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 17:41:14,428] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 17:41:14,525] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 17:41:14,541] ERROR: Training failed: Non-integer years and months are ambiguous and not currently supported.
+[2025-10-23 19:42:22,052] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 19:42:22,052] INFO: Configuration: configs/test.yaml
+[2025-10-23 19:42:22,053] INFO: Random seed set to 42
+[2025-10-23 19:42:22,053] INFO: Using device: mps
+[2025-10-23 19:42:22,053] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 19:42:22,150] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 19:42:22,248] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 19:42:22,266] INFO: Step 4: Training LSTM models...
+[2025-10-23 19:42:22,266] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 19:42:23,318] ERROR: Failed to train SENSEX fold 0: element 0 of tensors does not require grad and does not have a grad_fn
+[2025-10-23 19:42:23,380] ERROR: Failed to train SENSEX fold 1: element 0 of tensors does not require grad and does not have a grad_fn
+[2025-10-23 19:42:23,380] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-23 19:42:31,881] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 19:42:31,881] INFO: Configuration: configs/test.yaml
+[2025-10-23 19:42:31,881] INFO: Random seed set to 42
+[2025-10-23 19:42:31,881] INFO: Using device: mps
+[2025-10-23 19:42:31,881] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 19:42:31,956] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 19:42:32,049] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 19:42:32,066] INFO: Step 4: Training LSTM models...
+[2025-10-23 19:42:32,066] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 19:42:32,695] ERROR: Failed to train SENSEX fold 0: element 0 of tensors does not require grad and does not have a grad_fn
+[2025-10-23 19:42:32,755] ERROR: Failed to train SENSEX fold 1: element 0 of tensors does not require grad and does not have a grad_fn
+[2025-10-23 19:42:32,755] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-23 19:43:47,552] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 19:43:47,553] INFO: Configuration: configs/test.yaml
+[2025-10-23 19:43:47,554] INFO: Random seed set to 42
+[2025-10-23 19:43:47,554] INFO: Using device: mps
+[2025-10-23 19:43:47,554] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 19:43:47,641] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 19:43:47,730] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 19:43:47,748] INFO: Step 4: Training LSTM models...
+[2025-10-23 19:43:47,748] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 19:43:53,477] INFO: SENSEX summary: Avg train loss 0.0032, Avg val loss nan
+[2025-10-23 19:43:53,478] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-23 19:47:47,112] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 19:47:47,112] INFO: Configuration: configs/default.yaml
+[2025-10-23 19:47:47,114] INFO: Random seed set to 42
+[2025-10-23 19:47:47,114] INFO: Using device: mps
+[2025-10-23 19:47:47,114] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 19:47:47,200] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 19:47:47,292] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 19:47:47,314] INFO: Step 4: Training LSTM models...
+[2025-10-23 19:47:47,314] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 20:01:27,935] INFO: SENSEX summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-23 20:01:27,936] INFO: 
+=== Training GOLD models ===
+[2025-10-23 20:15:38,620] INFO: GOLD summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-23 20:15:38,621] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-23 20:49:40,178] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 20:49:40,178] INFO: Configuration: configs/default.yaml
+[2025-10-23 20:49:40,180] INFO: Random seed set to 42
+[2025-10-23 20:49:40,180] INFO: Using device: mps
+[2025-10-23 20:49:40,180] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 20:49:40,265] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 20:49:40,363] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 20:49:40,385] INFO: Step 4: Training LSTM models...
+[2025-10-23 20:49:40,385] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 21:02:53,374] INFO: SENSEX summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-23 21:02:53,374] INFO: 
+=== Training GOLD models ===
+[2025-10-23 21:15:17,366] INFO: GOLD summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-23 21:15:17,367] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-23 22:10:38,275] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 22:10:38,275] INFO: Configuration: configs/test.yaml
+[2025-10-23 22:10:38,276] INFO: Random seed set to 42
+[2025-10-23 22:10:38,276] INFO: Using device: mps
+[2025-10-23 22:10:38,276] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 22:10:38,369] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 22:10:38,470] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 22:10:38,487] INFO: Step 4: Training LSTM models...
+[2025-10-23 22:10:38,487] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 22:10:44,293] INFO: SENSEX summary: Avg train loss 0.0032, Avg val loss nan
+[2025-10-23 22:10:44,294] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-23 22:11:34,453] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 22:11:34,454] INFO: Configuration: configs/test.yaml
+[2025-10-23 22:11:34,455] INFO: Random seed set to 42
+[2025-10-23 22:11:34,455] INFO: Using device: mps
+[2025-10-23 22:11:34,455] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 22:11:34,543] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 22:11:34,634] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 22:11:34,650] INFO: Step 4: Training LSTM models...
+[2025-10-23 22:11:34,650] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 22:11:40,462] INFO: SENSEX summary: Avg train loss 0.0032, Avg val loss nan
+[2025-10-23 22:11:40,463] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-23 22:17:01,192] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-23 22:17:01,192] INFO: Configuration: configs/default.yaml
+[2025-10-23 22:17:01,194] INFO: Random seed set to 42
+[2025-10-23 22:17:01,194] INFO: Using device: mps
+[2025-10-23 22:17:01,194] INFO: Step 1: Verifying real data integrity...
+[2025-10-23 22:17:01,280] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-23 22:17:01,376] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-23 22:17:01,398] INFO: Step 4: Training LSTM models...
+[2025-10-23 22:17:01,398] INFO: 
+=== Training SENSEX models ===
+[2025-10-23 22:29:18,087] INFO: SENSEX summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-23 22:29:18,087] INFO: 
+=== Training GOLD models ===
+[2025-10-23 22:41:58,681] INFO: GOLD summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-23 22:41:58,683] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-24 23:14:17,800] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-24 23:14:17,800] INFO: Configuration: configs/default.yaml
+[2025-10-24 23:14:17,802] INFO: Random seed set to 42
+[2025-10-24 23:14:17,802] INFO: Using device: mps
+[2025-10-24 23:14:17,802] INFO: Step 1: Verifying real data integrity...
+[2025-10-24 23:14:17,895] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-24 23:14:18,001] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-24 23:14:18,027] INFO: Step 4: Training LSTM models...
+[2025-10-24 23:14:18,027] INFO: 
+=== Training SENSEX models ===
+[2025-10-24 23:24:43,170] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-24 23:24:43,170] INFO: Configuration: configs/default.yaml
+[2025-10-24 23:24:43,171] INFO: Random seed set to 42
+[2025-10-24 23:24:43,171] INFO: Using device: mps
+[2025-10-24 23:24:43,172] INFO: Step 1: Verifying real data integrity...
+[2025-10-24 23:24:43,248] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-24 23:24:43,340] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-24 23:24:43,361] INFO: Step 4: Training LSTM models...
+[2025-10-24 23:24:43,361] INFO: 
+=== Training SENSEX models ===
+[2025-10-24 23:44:00,954] INFO: SENSEX summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-24 23:44:00,955] INFO: 
+=== Training GOLD models ===
+[2025-10-24 23:57:30,824] INFO: GOLD summary: Avg train loss 0.0007, Avg val loss nan
+[2025-10-24 23:57:30,827] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-25 00:15:56,337] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-25 00:15:56,337] INFO: Configuration: configs/tuned.yaml
+[2025-10-25 00:15:56,339] INFO: Random seed set to 42
+[2025-10-25 00:15:56,339] INFO: Using device: mps
+[2025-10-25 00:15:56,339] INFO: Step 1: Verifying real data integrity...
+[2025-10-25 00:15:56,415] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-25 00:15:56,510] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-25 00:15:56,530] INFO: Step 4: Training LSTM models...
+[2025-10-25 00:15:56,530] INFO: 
+=== Training SENSEX models ===
+[2025-10-25 00:51:46,483] INFO: SENSEX summary: Avg train loss 0.0002, Avg val loss nan
+[2025-10-25 00:51:46,484] INFO: 
+=== Training GOLD models ===
+[2025-10-25 01:26:54,827] INFO: GOLD summary: Avg train loss 0.0002, Avg val loss nan
+[2025-10-25 01:26:54,829] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-25 10:47:36,517] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-25 10:47:36,518] INFO: Configuration: configs/tuned.yaml
+[2025-10-25 10:47:36,519] INFO: Random seed set to 42
+[2025-10-25 10:47:36,519] INFO: Using device: mps
+[2025-10-25 10:47:36,520] INFO: Step 1: Verifying real data integrity...
+[2025-10-25 10:47:36,610] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-25 10:47:36,703] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-25 10:47:36,724] INFO: Step 4: Training LSTM models...
+[2025-10-25 10:47:36,724] INFO: 
+=== Training SENSEX models ===
+[2025-10-25 10:48:08,950] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-25 10:48:08,950] INFO: Configuration: configs/tuned.yaml
+[2025-10-25 10:48:08,951] INFO: Random seed set to 42
+[2025-10-25 10:48:08,951] INFO: Using device: mps
+[2025-10-25 10:48:08,951] INFO: Step 1: Verifying real data integrity...
+[2025-10-25 10:48:09,027] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-25 10:48:09,118] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-25 10:48:09,138] INFO: Step 4: Training LSTM models...
+[2025-10-25 10:48:09,138] INFO: 
+=== Training SENSEX models ===
+[2025-10-25 11:24:14,777] INFO: SENSEX summary: Avg train loss 0.0261, Avg val loss nan
+[2025-10-25 11:24:14,777] INFO: 
+=== Training GOLD models ===
+[2025-10-25 12:03:34,247] INFO: GOLD summary: Avg train loss 0.0281, Avg val loss nan
+[2025-10-25 12:03:34,250] INFO: Training completed successfully. Summary saved to reports/training_summary.json
+[2025-10-25 12:35:22,927] INFO: === SENSEX-GOLD LSTM PREDICTOR TRAINING ===
+[2025-10-25 12:35:22,927] INFO: Configuration: configs/tuned.yaml
+[2025-10-25 12:35:22,929] INFO: Random seed set to 42
+[2025-10-25 12:35:22,929] INFO: Using device: mps
+[2025-10-25 12:35:22,929] INFO: Step 1: Verifying real data integrity...
+[2025-10-25 12:35:23,013] INFO: Step 2: Ingesting and cleaning data...
+[2025-10-25 12:35:23,108] INFO: Step 3: Creating temporal cross-validation folds...
+[2025-10-25 12:35:23,128] INFO: Step 4: Training LSTM models...
+[2025-10-25 12:35:23,128] INFO: 
+=== Training SENSEX models ===
+[2025-10-25 13:13:15,159] INFO: SENSEX summary: Avg train loss 0.0251, Avg val loss nan
+[2025-10-25 13:13:15,159] INFO: 
+=== Training GOLD models ===
+[2025-10-25 14:20:57,822] INFO: GOLD summary: Avg train loss 0.0280, Avg val loss nan
+[2025-10-25 14:20:57,825] INFO: Training completed successfully. Summary saved to reports/training_summary.json
